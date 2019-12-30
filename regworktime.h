@@ -30,6 +30,16 @@ private slots:
 
     void on_LoginButton_clicked();
 
+    void on_addemployee_Button_clicked();
+
+    void on_editemployee_Button_clicked();
+
+    void on_schedule_Button_clicked();
+
+    void on_presence_Button_clicked();
+
+    void on_reportButton_clicked();
+
 private:
     Ui::Regworktime *ui;
 };

@@ -7,7 +7,7 @@ Regworktime::Regworktime(QWidget *parent)
     , ui(new Ui::Regworktime)
 {
     ui->setupUi(this);
-
+    ui->stackedWidget->setCurrentIndex(0);
 
     Database db ;
 
@@ -99,3 +99,28 @@ void Regworktime::on_backToMenuFromReport_clicked()
 
 
 
+
+void Regworktime::on_addemployee_Button_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void Regworktime::on_editemployee_Button_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(3);
+}
+
+void Regworktime::on_schedule_Button_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+void Regworktime::on_presence_Button_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+void Regworktime::on_reportButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+}
