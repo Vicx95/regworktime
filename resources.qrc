@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>resources/add_worker.png</file>
+        <file>resources/background.jpg</file>
+        <file>resources/edit_worker.png</file>
+        <file>resources/icon.png</file>
+        <file>resources/report.png</file>
+        <file>resources/schedule.png</file>
+        <file>resources/security.png</file>
+        <file>resources/worker_presence.png</file>
+    </qresource>
+</RCC>

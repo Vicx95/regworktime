@@ -6,14 +6,476 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1156</width>
+    <height>776</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Regworktime</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/img/resources/icon.png</normaloff>:/img/resources/icon.png</iconset>
+  </property>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1151</width>
+     <height>771</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#stackedWidget{
+	
+	border-image: url(:/img/resources/background.jpg);
+}</string>
+   </property>
+   <property name="currentIndex">
+    <number>2</number>
+   </property>
+   <widget class="QWidget" name="loginPage">
+    <widget class="QGroupBox" name="loginForm">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>320</y>
+       <width>311</width>
+       <height>241</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::NoContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#loginForm{
+	
+	background:rgb(255,170,0);
+	border-radius: 20px;
+	
+
+}</string>
+     </property>
+     <property name="title">
+      <string>Logowanie</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Nazwa użytkownika</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="usernameField"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetFixedSize</enum>
+        </property>
+        <item>
+         <widget class="QLabel" name="Pasword_label_2">
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Hasło</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="passwordField">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_8"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="loginButton">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#loginButton{
+	color: white;
+background-color: #27a9e3;
+border-width:0px;
+border-radius: 4px;
+}
+
+#loginButton:hover{
+
+background-color: #66c011;
+
+}</string>
+        </property>
+        <property name="text">
+         <string>Zaloguj</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="databaseStatus">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>[+]status</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="securityIcon" native="true">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>60</y>
+       <width>321</width>
+       <height>231</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#securityIcon{
+	
+	border-image: url(:/img/resources/security.png);
+}</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="menuPage">
+    <widget class="QPushButton" name="editemployee_Button">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>260</y>
+       <width>201</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#editemployee_Button{
+	
+	
+	border-image: url(:/img/resources/edit_worker.png);
+	
+}</string>
+     </property>
+     <property name="text">
+      <string>Edytuj pracownika</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addemployee_Button">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>260</y>
+       <width>201</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#addemployee_Button{
+	
+	
+	border-image: url(:/img/resources/add_worker.png);
+	
+}</string>
+     </property>
+     <property name="text">
+      <string>Dodaj pracownika</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="schedule_Button">
+     <property name="geometry">
+      <rect>
+       <x>590</x>
+       <y>260</y>
+       <width>201</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#schedule_Button{
+	
+	border-image: url(:/img/resources/schedule.png);
+	
+}</string>
+     </property>
+     <property name="text">
+      <string>Grafik</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="presence_Button">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>260</y>
+       <width>201</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#presence_Button{
+	
+	border-image: url(:/img/resources/worker_presence.png);
+	
+}</string>
+     </property>
+     <property name="text">
+      <string>Obecność</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reportButton">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>440</y>
+       <width>201</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#reportButton{
+	
+	
+	border-image: url(:/img/resources/report.png);
+	
+}</string>
+     </property>
+     <property name="text">
+      <string>Raporty</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="addemployeePage">
+    <widget class="QGroupBox" name="addemployeeForm_2">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>210</y>
+       <width>361</width>
+       <height>451</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#addemployeeForm{
+	background:rgb(255,170,0);
+	border-radius: 20px;
+	
+}</string>
+     </property>
+     <property name="title">
+      <string>Dodaj pracownika</string>
+     </property>
+     <widget class="QWidget" name="icon_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>281</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#icon{
+	
+	border-image: url(:/img/resources/add_worker.png);
+}</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>210</y>
+        <width>344</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="nameLabel_3">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Imię</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="nameField_3"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="surnameLabel_3">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Nazwisko</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="surnameField_3"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <widget class="QLabel" name="phoneLabel_3">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Telefon</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="phoneField_3"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <item>
+          <widget class="QLabel" name="dateofemploymentLabel_3">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Data zatrudnienia</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="dateField_3"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="addemployeepushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>101</x>
+        <y>400</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#addemployeepushButton{
+	color: white;
+background-color: #27a9e3;
+border-width:0px;
+border-radius: 4px;
+}
+
+#addemployeepushButton:hover{
+
+background-color: #66c011;
+
+}</string>
+      </property>
+      <property name="text">
+       <string>Dodaj</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="editemployeePage"/>
+   <widget class="QWidget" name="schedulePage"/>
+   <widget class="QWidget" name="presencePage"/>
+   <widget class="QWidget" name="reportPage"/>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
