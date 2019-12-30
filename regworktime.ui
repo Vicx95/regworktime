@@ -33,7 +33,7 @@
 }</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="loginPage">
     <widget class="QWidget" name="securityIcon" native="true">
@@ -692,22 +692,6 @@ background-color: #66c011;
     </widget>
    </widget>
    <widget class="QWidget" name="presencePage">
-    <widget class="QWidget" name="widget_pres" native="true">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>210</y>
-       <width>361</width>
-       <height>311</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">#widget_pres{
-	
-	border-image: url(:/img/resources/worker_presence.png);
-}</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="backToMenuFromPresence">
      <property name="geometry">
       <rect>
@@ -719,6 +703,29 @@ background-color: #66c011;
      </property>
      <property name="text">
       <string>Menu</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="PresenceView">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>100</y>
+       <width>761</width>
+       <height>521</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="CheckPresenceButton">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>50</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Sprawdź obecność</string>
      </property>
     </widget>
    </widget>

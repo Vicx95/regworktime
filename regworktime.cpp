@@ -124,3 +124,34 @@ void Regworktime::on_reportButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
 }
+
+void Regworktime::on_CheckPresenceButton_clicked()
+{
+
+    Database database;
+    bool presence = 1 ;
+    if(database.get_database().open())
+    {
+        QSqlQueryModel *model = new QSqlQueryModel();
+
+        QSqlQuery query(QSqlDatabase::database("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=regworktime;"));
+
+        query.prepare("SELECT * FROM employee  WHERE is_present = 1 ");
+        query.bindValue(":is_present",presence);
+        if(!query.exec())
+        {
+            QMessageBox::information(this,"Błąd","Nie można wykonać zapytania");
+        }
+        else
+        {
+            model->setQuery(query);
+            ui->PresenceView->setModel(model);
+
+        }
+
+     }
+  //  database.close_db();
+}
+
+
+
