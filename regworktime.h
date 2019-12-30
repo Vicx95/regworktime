@@ -15,6 +15,21 @@ public:
     Regworktime(QWidget *parent = nullptr);
     ~Regworktime();
 
+private slots:
+    void on_LogoutButton_clicked();
+
+    void on_backtoMenufromaddEmployee_clicked();
+
+    void on_backToMenuFromEditEmployee_clicked();
+
+    void on_backToMenuFromSchedule_clicked();
+
+    void on_backToMenuFromPresence_clicked();
+
+    void on_backToMenuFromReport_clicked();
+
+    void on_LoginButton_clicked();
+
 private:
     Ui::Regworktime *ui;
 };
