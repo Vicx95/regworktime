@@ -17,11 +17,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     database.cpp \
+    employee.cpp \
+    iperson.cpp \
     main.cpp \
     regworktime.cpp
 
 HEADERS += \
     database.h \
+    employee.h \
+    iperson.h \
     regworktime.h
 
 FORMS += \
