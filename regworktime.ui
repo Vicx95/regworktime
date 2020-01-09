@@ -33,7 +33,7 @@
 }</string>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="loginPage">
     <widget class="QWidget" name="securityIcon" native="true">
@@ -546,6 +546,25 @@ background-color: #66c011;
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Wybierz pracownika</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="GetEmployeeComboBox"/>
+         </item>
+        </layout>
+       </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_15">
          <item>

@@ -135,7 +135,6 @@ void Regworktime::on_CheckPresenceButton_clicked()
         QSqlQueryModel *model = new QSqlQueryModel();
 
         QSqlQuery query(QSqlDatabase::database("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=regworktime;"));
-
         query.prepare("SELECT * FROM employee  WHERE is_present = 1 ");
         query.bindValue(":is_present",presence);
         if(!query.exec())
@@ -148,6 +147,8 @@ void Regworktime::on_CheckPresenceButton_clicked()
             ui->PresenceView->setModel(model);
 
         }
+
+        delete model;
 
      }
   //  database.close_db();

@@ -20,13 +20,15 @@ SOURCES += \
     employee.cpp \
     iperson.cpp \
     main.cpp \
-    regworktime.cpp
+    regworktime.cpp \
+    serialportmonitor.cpp
 
 HEADERS += \
     database.h \
     employee.h \
     iperson.h \
-    regworktime.h
+    regworktime.h \
+    serialportmonitor.h
 
 FORMS += \
     regworktime.ui
