@@ -1,5 +1,5 @@
 #include "regworktime.h"
-
+#include "serialportmonitor.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

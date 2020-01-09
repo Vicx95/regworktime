@@ -5,26 +5,21 @@
 
 class Employee : public Person
 {
-    Q_OBJECT
-public:
-    explicit Employee(QObject *parent = nullptr);
 
-signals:
+
 
 public:
-    Employee();
+    Employee(QString _name, QString _surname, QString _phone_number, QDate _date);
 
     void add() override;
     void edit() override;
 
 
     ~Employee() override ;
-public slots:
 
-private:
+
     QString name ;
     QString surname;
-    QString department;
     QString phone_number;
     QDate date_of_employment;
 };

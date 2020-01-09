@@ -1,13 +1,12 @@
 #ifndef PERSON_H
 #define PERSON_H
 
-#include <QObject>
 
-class Person : public QObject
+class Person
 {
-    Q_OBJECT
+
 public:
-    explicit Person(QObject *parent = nullptr);
+    explicit Person();
 
     virtual void add()  = 0;
     virtual void edit()  = 0;
@@ -15,9 +14,7 @@ public:
 
     virtual ~Person();
 
-signals:
 
-public slots:
 };
 
 #endif // PERSON_H

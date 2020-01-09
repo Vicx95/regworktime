@@ -1,19 +1,29 @@
 #ifndef REGWORKTIME_H
 #define REGWORKTIME_H
-
+#include "serialportmonitor.h"
+#include "superior.h"
 #include <QWidget>
-
+#include <QDebug>
+#include <QObject>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Regworktime; }
 QT_END_NAMESPACE
+
+
+
 
 class Regworktime : public QWidget
 {
     Q_OBJECT
 
 public:
+    SerialPortMonitor serialPortMonitor;
+
     Regworktime(QWidget *parent = nullptr);
     ~Regworktime();
+
+    SerialPortMonitor getSerialPort();
+
 
 private slots:
     void on_LogoutButton_clicked();
@@ -42,7 +52,15 @@ private slots:
 
     void on_CheckPresenceButton_clicked();
 
+    void on_buttonAddEmployee_clicked();
+
+    void on_GetEmployeeListButton_clicked();
+
+    void on_GetEmployeeComboBox_currentIndexChanged(int index);
+
 private:
     Ui::Regworktime *ui;
+
+
 };
 #endif // REGWORKTIME_H

@@ -1,6 +1,6 @@
 #include "iperson.h"
 
-Person::Person(QObject *parent) : QObject(parent)
+Person::Person()
 {
 
 }

@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += sql
+QT       += serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -21,14 +22,16 @@ SOURCES += \
     iperson.cpp \
     main.cpp \
     regworktime.cpp \
-    serialportmonitor.cpp
+    serialportmonitor.cpp \
+    superior.cpp
 
 HEADERS += \
     database.h \
     employee.h \
     iperson.h \
     regworktime.h \
-    serialportmonitor.h
+    serialportmonitor.h \
+    superior.h
 
 FORMS += \
     regworktime.ui

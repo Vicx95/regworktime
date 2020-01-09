@@ -5,22 +5,16 @@
 #include <memory>
 #include <QMessageBox>
 #include <QDebug>
-class SerialPortMonitor : public QObject
+class SerialPortMonitor
 {
-    Q_OBJECT
+
 public:
-    explicit SerialPortMonitor(QObject *parent = nullptr);
+    explicit SerialPortMonitor();
 
 
     void openSerialPort();
     void closeSerialPort();
     void readData();
-
-signals:
-
-
-
-public slots:
 
 
 private:

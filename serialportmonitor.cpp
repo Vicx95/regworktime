@@ -1,6 +1,6 @@
 #include "serialportmonitor.h"
 
-SerialPortMonitor::SerialPortMonitor(QObject *parent) : QObject(parent)
+SerialPortMonitor::SerialPortMonitor()
 {
 
 }
