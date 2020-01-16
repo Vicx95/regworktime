@@ -9,6 +9,7 @@ class Employee : public Person
 
 
 public:
+    Employee(int id, QString _name, QString _surname, QString _phone_number, QDate _date);
     Employee(QString _name, QString _surname, QString _phone_number, QDate _date);
 
     void add() override;
@@ -17,7 +18,7 @@ public:
 
     ~Employee() override ;
 
-
+    int id;
     QString name ;
     QString surname;
     QString phone_number;

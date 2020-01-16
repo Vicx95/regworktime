@@ -1,7 +1,8 @@
-#include "regworktime.h"
+﻿#include "regworktime.h"
 #include "ui_regworktime.h"
 #include <QDate>
 #include <QMessageBox>
+#include "serialportmonitor.h"
 #include "employee.h"
 
 #include <QFileInfo>
@@ -12,7 +13,11 @@ Regworktime::Regworktime(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
+    SerialPortMonitor monitor ;
 
+    monitor.openSerialPort();
+
+    monitor.readData();
     QSqlDatabase db = QSqlDatabase::database();
 
     if(db.open())
@@ -24,6 +29,7 @@ Regworktime::Regworktime(QWidget *parent)
         ui->databaseStatus->setText("Brak połączenia z bazą danych...");
     }
     db.close();
+    monitor.closeSerialPort();
 }
 
 Regworktime::~Regworktime()
@@ -217,11 +223,42 @@ void Regworktime::on_GetEmployeeComboBox_currentIndexChanged(const QString &arg1
     {
         while(query.next())
         {
+           ui->idLineEdit->setText(query.value(0).toString());
            ui->fieldeditName->setText(query.value(1).toString());
            ui->fieldeditSurname->setText(query.value(2).toString());
            ui->fieldeditPhone->setText(query.value(3).toString());
            ui->fieldeditDate->setDate(query.value(5).toDate());
         }
     }
+
+}
+
+void Regworktime::on_buttonEditEmployee_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+
+    Employee editEmployee(ui->idLineEdit->text().toInt(),
+                          ui->fieldeditName->text(),
+                          ui->fieldeditSurname->text(),
+                          ui->fieldeditPhone->text(),
+                          ui->fieldeditDate->date());
+
+    QString dateFormat = "yyyy-MM-dd";
+
+    QSqlQuery editQuery;
+    editQuery.prepare("UPDATE employee SET employee_name = '"+editEmployee.name+"'"
+                      ", employee_surname = '"+editEmployee.surname+"', phone_number = '"+editEmployee.phone_number+"'"
+                      ",date_of_employment = '"+editEmployee.date_of_employment.toString(dateFormat)+"' WHERE employee_id = :employee_id ");
+    editQuery.bindValue(":employee_id",editEmployee.id);
+    if(editQuery.exec())
+    {
+        QMessageBox::information(this,"Sukces","Edycja danych zakończyła się powodzeniem");
+    }
+    else
+    {
+        QMessageBox::critical(this,tr("Błąd"),editQuery.lastError().text());
+    }
+
+
 
 }

@@ -62,6 +62,8 @@ private slots:
 
     void on_GetEmployeeComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_buttonEditEmployee_clicked();
+
 private:
     Ui::Regworktime *ui;
 
