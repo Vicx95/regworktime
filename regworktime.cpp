@@ -3,7 +3,7 @@
 #include <QDate>
 #include <QMessageBox>
 #include "employee.h"
-#include "database.h"
+
 #include <QFileInfo>
 Regworktime::Regworktime(QWidget *parent)
     : QWidget(parent),
@@ -13,10 +13,9 @@ Regworktime::Regworktime(QWidget *parent)
     ui->stackedWidget->setCurrentIndex(0);
 
 
+    QSqlDatabase db = QSqlDatabase::database();
 
-    Database db ;
-
-    if(db.get_database().open())
+    if(db.open())
     {
         ui->databaseStatus->setText("Nawiązano połączenie z bazą danych...");
     }
@@ -24,13 +23,12 @@ Regworktime::Regworktime(QWidget *parent)
     {
         ui->databaseStatus->setText("Brak połączenia z bazą danych...");
     }
-    db.close_db();
+    db.close();
 }
 
 Regworktime::~Regworktime()
 {
     delete ui;
-   // serialPortMonitor.closeSerialPort();
 }
 
 
@@ -117,9 +115,10 @@ void Regworktime::on_reportButton_clicked()
 void Regworktime::on_CheckPresenceButton_clicked()
 {
 
-    Database database;
+    QSqlDatabase db = QSqlDatabase::database();
+
     bool presence = 1 ;
-    if(database.get_database().open())
+    if(db.open())
     {
         QSqlQueryModel *model = new QSqlQueryModel();
 
@@ -137,10 +136,10 @@ void Regworktime::on_CheckPresenceButton_clicked()
 
         }
 
-        delete model;
+
 
      }
-    database.close_db();
+
 }
 
 
@@ -148,7 +147,7 @@ void Regworktime::on_CheckPresenceButton_clicked()
 
 void Regworktime::on_buttonAddEmployee_clicked()
 {
-    Database database;
+    QSqlDatabase db = QSqlDatabase::database();
     Employee employee(ui->fieldName->text(),
                       ui->fieldSurname->text(),
                       ui->fieldPhone->text(),
@@ -157,12 +156,10 @@ void Regworktime::on_buttonAddEmployee_clicked()
     QString dateFormat = "yyyy-MM-dd";
     QString dateString = employee.date_of_employment.toString(dateFormat);
 
-    if(database.get_database().open())
+    if(db.open())
     {
 
         QSqlQuery query(QSqlDatabase::database("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=regworktime;"));
-       // query.prepare("INSERT INTO employee (employee_name, employee_surname,phone_number,date_of_employment) "
-         //             "values(?,?,?,?)");
 
         query.prepare("INSERT INTO employee SET employee_name = '"+employee.name+"', employee_surname = '"+employee.surname+"', phone_number ='"+employee.phone_number+"',"
                       "date_of_employment = '"+dateString+"' ");
@@ -174,12 +171,12 @@ void Regworktime::on_buttonAddEmployee_clicked()
             ui->fieldSurname->clear();
             ui->fieldPhone->clear();
             ui->fieldDate->clear();
-            database.close_db();
+            db.close();
         }
         else
         {
            QMessageBox::critical(this,tr("Error::"),query.lastError().text());
-             database.close_db();
+             db.close();
         }
 
      }
@@ -188,60 +185,43 @@ void Regworktime::on_buttonAddEmployee_clicked()
 
 void Regworktime::on_GetEmployeeListButton_clicked()
 {
-    Database database ;
+    QSqlDatabase db = QSqlDatabase::database();
 
-    QSqlQueryModel* model = new QSqlQueryModel();
-
-    if(database.get_database().open())
+    if(db.open())
     {
-       model->setQuery("SELECT employee_id, employee_name FROM employee");
+        QSqlQueryModel* model = new QSqlQueryModel ;
+        model->setQuery("SELECT employee_name, employee_surname FROM employee");
+        model->setHeaderData(0,Qt::Horizontal,tr("Imię"));
+        model->setHeaderData(1,Qt::Horizontal,tr("Nazwisko"));
 
-       model->setHeaderData(0,Qt::Horizontal,tr("ID"));
-       model->setHeaderData(1,Qt::Horizontal,tr("Imię"));
-
-       QTableView * view = new QTableView;
-       view->verticalHeader()->hide();
-       view->horizontalHeader()->hide();
-       view->setSelectionBehavior(QAbstractItemView::SelectRows);
-       view->setSelectionMode(QAbstractItemView::SingleSelection);
-       ui->GetEmployeeComboBox->setModel(model);
-       ui->GetEmployeeComboBox->setView(view);
-
-       delete view ;
-
+        QTableView* view = new QTableView ;
+        view->setSelectionBehavior(QAbstractItemView::SelectColumns);
+        view->setSelectionMode(QAbstractItemView::SingleSelection);
+        ui->GetEmployeeComboBox->setModel(model);
+        ui->GetEmployeeComboBox->setView(view);
     }
 
-     delete model;
-    database.close_db();
+
 }
 
 
-void Regworktime::on_GetEmployeeComboBox_currentIndexChanged(int index)
+
+void Regworktime::on_GetEmployeeComboBox_currentIndexChanged(const QString &arg1)
 {
-   Database database;
-
-
-    QString id = QString::number(index = ui->GetEmployeeComboBox->currentIndex());
+    QString name = ui->GetEmployeeComboBox->currentText();
+    QSqlDatabase db = QSqlDatabase::database();
 
     QSqlQuery query ;
-   query.prepare("SELECT * FROM employee WHERE employee_id = '"+id+"'");
-
-    if(database.get_database().open())
+    query.prepare("SELECT * FROM employee WHERE employee_name = '"+name+"'");
+    if(query.exec())
     {
-        if(query.exec())
+        while(query.next())
         {
-            while(query.next())
-            {
-                ui->fieldeditName->setText(query.value(1).toString());
-                ui->fieldeditSurname->setText(query.value(2).toString());
-                ui->fieldeditPhone->setText(query.value(3).toString());
-                ui->fieldeditDate->setDate(query.value(4).toDate());
-            }
-            database.close_db();
-        }
-        else
-        {
-            QMessageBox::critical(this,"Błąd",query.lastError().text());
+           ui->fieldeditName->setText(query.value(1).toString());
+           ui->fieldeditSurname->setText(query.value(2).toString());
+           ui->fieldeditPhone->setText(query.value(3).toString());
+           ui->fieldeditDate->setDate(query.value(5).toDate());
         }
     }
+
 }

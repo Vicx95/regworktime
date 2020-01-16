@@ -1,7 +1,7 @@
 #ifndef SUPERIOR_H
 #define SUPERIOR_H
 #include "iperson.h"
-#include "database.h"
+#include <QSqlDatabase>
 #include "regworktime.h"
 #include <QMessageBox>
 class Superior : public Person

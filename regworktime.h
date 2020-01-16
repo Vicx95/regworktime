@@ -2,6 +2,9 @@
 #define REGWORKTIME_H
 #include "serialportmonitor.h"
 #include "superior.h"
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QSqlError>
 #include <QWidget>
 #include <QDebug>
 #include <QObject>
@@ -56,7 +59,8 @@ private slots:
 
     void on_GetEmployeeListButton_clicked();
 
-    void on_GetEmployeeComboBox_currentIndexChanged(int index);
+
+    void on_GetEmployeeComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::Regworktime *ui;

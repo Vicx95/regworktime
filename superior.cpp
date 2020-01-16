@@ -19,8 +19,8 @@ void Superior::edit()
 bool Superior::login()
 {
     bool success = false;
-    Database database;
-    if(database.get_database().open())
+    QSqlDatabase db = QSqlDatabase::database();
+    if(db.open())
     {
         QSqlQuery query(QSqlDatabase::database("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=regworktime;"));
 
@@ -37,7 +37,6 @@ bool Superior::login()
             msgBox.setStandardButtons(QMessageBox::Ok);
             msgBox.exec();
             success = false;
-           // QMessageBox::information(this,"Błąd","Nie można wykonać zapytania");
         }
         else
         {
@@ -60,6 +59,6 @@ bool Superior::login()
             }
         }
     }
-   database.close_db();
+    db.close();
    return  success ;
 }
