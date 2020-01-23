@@ -21,9 +21,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>80</y>
+     <y>100</y>
      <width>1161</width>
-     <height>701</height>
+     <height>681</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -33,7 +33,7 @@
 }</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="loginPage">
     <widget class="QWidget" name="securityIcon" native="true">
@@ -734,16 +734,6 @@ background-color: #66c011;
     </widget>
    </widget>
    <widget class="QWidget" name="schedulePage">
-    <widget class="QCalendarWidget" name="calendarWidget">
-     <property name="geometry">
-      <rect>
-       <x>310</x>
-       <y>240</y>
-       <width>551</width>
-       <height>351</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="backToMenuFromSchedule">
      <property name="geometry">
       <rect>
@@ -756,6 +746,222 @@ background-color: #66c011;
      <property name="text">
       <string>Menu</string>
      </property>
+    </widget>
+    <widget class="QGroupBox" name="scheduleForm">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>50</y>
+       <width>481</width>
+       <height>521</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#scheduleForm{
+	background:rgb(255,170,0);
+	border-radius: 20px;
+	
+}</string>
+     </property>
+     <property name="title">
+      <string>Grafik</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Wybierz pracownika</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="scheduleGetEmployeeList">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Imię</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nazwisko</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_2">
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="workStartDatelabel">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Data rozpoczęcia pracy</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="workstartDate">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Godzina rozpoczęcia</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTimeEdit" name="workstartTime">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Godzina zakończenia</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTimeEdit" name="workendTime">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QPushButton" name="addSchedulebutton">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Dodaj</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editSchedulebutton">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Edytuj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="presencePage">
@@ -828,25 +1034,16 @@ background-color: #66c011;
     </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="connectSerialPort">
+  <widget class="QDockWidget" name="dockWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>51</width>
-     <height>51</height>
+     <x>570</x>
+     <y>-20</y>
+     <width>591</width>
+     <height>81</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">#connectSerialPort{
- 
-	
-	border-image: url(:/img/resources/connect.png);
-}</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
+   <widget class="QWidget" name="dockWidgetContents"/>
   </widget>
  </widget>
  <resources>

@@ -1,14 +1,17 @@
 #ifndef REGWORKTIME_H
 #define REGWORKTIME_H
 #include "superior.h"
+#include <QDate>
+#include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QSqlError>
 #include <QWidget>
 #include <QDebug>
 #include <QObject>
+#include <QToolBar>
 #include <QSerialPort>
-#include <QAction>
+
 #include "console.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class Regworktime; }
@@ -75,7 +78,6 @@ private slots:
 
     void on_buttonEditEmployee_clicked();
 
-    void on_connectSerialPort_clicked();
 
 private:
     Ui::Regworktime *ui;

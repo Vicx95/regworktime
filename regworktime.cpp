@@ -1,7 +1,6 @@
 ﻿#include "regworktime.h"
 #include "ui_regworktime.h"
-#include <QDate>
-#include <QMessageBox>
+#include <QAction>
 
 #include "employee.h"
 
@@ -16,6 +15,19 @@ Regworktime::Regworktime(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+
+
+    auto toolbar = new QToolBar();
+    toolbar->addAction("Połącz",this,SLOT(openSerialPort()));
+    toolbar->setStyleSheet("QToolBar {border:10 px solid blue}");
+    auto layout = new QVBoxLayout();
+    layout->setMenuBar(toolbar);
+    layout->addWidget(console);
+    layout->setContentsMargins(0,0,0,0);
+    auto dockContent = new QWidget();
+    dockContent->setLayout(layout);
+    ui->dockWidget->setWidget(dockContent);
+    ui->dockWidget->setFeatures(ui->dockWidget->features()& QDockWidget::NoDockWidgetFeatures);
 
 
 
@@ -34,7 +46,6 @@ Regworktime::Regworktime(QWidget *parent)
     {
         ui->databaseStatus->setText("Brak połączenia z bazą danych...");
     }
-    db.close();
 
 }
 
@@ -320,9 +331,4 @@ void Regworktime::on_buttonEditEmployee_clicked()
 
 
 
-}
-
-void Regworktime::on_connectSerialPort_clicked()
-{
-   // connect(serialPortMonitor,&QAction::triggered,this,&Regworktime::openSerialPort);
 }
