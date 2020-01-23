@@ -2,22 +2,28 @@
 #include "ui_regworktime.h"
 #include <QDate>
 #include <QMessageBox>
-#include "serialportmonitor.h"
+
 #include "employee.h"
 
 #include <QFileInfo>
 Regworktime::Regworktime(QWidget *parent)
     : QWidget(parent),
-      ui(new Ui::Regworktime)
+      ui(new Ui::Regworktime),
+      console(new Console),
+      serialPortMonitor(new QSerialPort(this))
+
+
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
 
-    SerialPortMonitor monitor ;
 
-    monitor.openSerialPort();
 
-    monitor.readData();
+
+    connect(serialPortMonitor,&QSerialPort::errorOccurred,this,&Regworktime::handleError);
+    connect(serialPortMonitor,&QSerialPort::readyRead,this,&Regworktime::readData);
+    connect(console,&Console::getData,this,&Regworktime::writeData);
+
     QSqlDatabase db = QSqlDatabase::database();
 
     if(db.open())
@@ -29,7 +35,7 @@ Regworktime::Regworktime(QWidget *parent)
         ui->databaseStatus->setText("Brak połączenia z bazą danych...");
     }
     db.close();
-    monitor.closeSerialPort();
+
 }
 
 Regworktime::~Regworktime()
@@ -37,6 +43,59 @@ Regworktime::~Regworktime()
     delete ui;
 }
 
+
+void Regworktime::openSerialPort()
+{
+    serialPortMonitor->setPortName("COM3");
+    serialPortMonitor->setBaudRate(QSerialPort::Baud9600);
+    serialPortMonitor->setDataBits(QSerialPort::Data8);
+    serialPortMonitor->setParity(QSerialPort::NoParity);
+    serialPortMonitor->setStopBits(QSerialPort::OneStop);
+    serialPortMonitor->setFlowControl(QSerialPort::NoFlowControl);
+
+    if(serialPortMonitor->open(QIODevice::ReadWrite))
+    {
+        console->setEnabled(true);
+        console->setLocalEchoEnabled(true);
+    }
+    else
+    {
+        QMessageBox::critical(this,tr("Błąd"),serialPortMonitor->errorString());
+    }
+}
+
+
+void Regworktime::closeSerialPort()
+{
+    if(serialPortMonitor->isOpen())
+    {
+        serialPortMonitor->close();
+        console->setEnabled(false);
+
+    }
+}
+
+
+void Regworktime::writeData(const QByteArray& data)
+{
+    serialPortMonitor->write(data);
+}
+
+void Regworktime::readData()
+{
+    const QByteArray data = serialPortMonitor->readAll();
+    console->putData(data);
+}
+
+
+void Regworktime::handleError(QSerialPort::SerialPortError error)
+{
+    if(error == QSerialPort::ResourceError)
+    {
+        QMessageBox::critical(this, tr("Critical Error"), serialPortMonitor->errorString());
+        closeSerialPort();
+    }
+}
 
 void Regworktime::on_LoginButton_clicked()
 {
@@ -261,4 +320,9 @@ void Regworktime::on_buttonEditEmployee_clicked()
 
 
 
+}
+
+void Regworktime::on_connectSerialPort_clicked()
+{
+   // connect(serialPortMonitor,&QAction::triggered,this,&Regworktime::openSerialPort);
 }

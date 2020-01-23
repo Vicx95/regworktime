@@ -21,9 +21,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
-     <width>1151</width>
-     <height>771</height>
+     <y>80</y>
+     <width>1161</width>
+     <height>701</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -33,7 +33,7 @@
 }</string>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="loginPage">
     <widget class="QWidget" name="securityIcon" native="true">
@@ -827,6 +827,26 @@ background-color: #66c011;
      </property>
     </widget>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="connectSerialPort">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#connectSerialPort{
+ 
+	
+	border-image: url(:/img/resources/connect.png);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources>

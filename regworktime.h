@@ -1,6 +1,5 @@
 #ifndef REGWORKTIME_H
 #define REGWORKTIME_H
-#include "serialportmonitor.h"
 #include "superior.h"
 #include <QSqlQuery>
 #include <QSqlQueryModel>
@@ -8,10 +7,14 @@
 #include <QWidget>
 #include <QDebug>
 #include <QObject>
+#include <QSerialPort>
+#include <QAction>
+#include "console.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class Regworktime; }
-QT_END_NAMESPACE
 
+
+QT_END_NAMESPACE
 
 
 
@@ -20,15 +23,23 @@ class Regworktime : public QWidget
     Q_OBJECT
 
 public:
-    SerialPortMonitor serialPortMonitor;
-
     Regworktime(QWidget *parent = nullptr);
     ~Regworktime();
 
-    SerialPortMonitor getSerialPort();
 
 
 private slots:
+
+    void openSerialPort();
+
+    void closeSerialPort();
+
+    void writeData(const QByteArray &data);
+
+    void readData();
+
+    void handleError(QSerialPort::SerialPortError error);
+
     void on_LogoutButton_clicked();
 
     void on_backtoMenufromaddEmployee_clicked();
@@ -64,8 +75,12 @@ private slots:
 
     void on_buttonEditEmployee_clicked();
 
+    void on_connectSerialPort_clicked();
+
 private:
     Ui::Regworktime *ui;
+    Console* console = nullptr;
+    QSerialPort* serialPortMonitor = nullptr;
 
 
 };

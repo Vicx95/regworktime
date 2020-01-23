@@ -8,5 +8,7 @@
         <file>resources/schedule.png</file>
         <file>resources/security.png</file>
         <file>resources/worker_presence.png</file>
+        <file>resources/application-exit.png</file>
+        <file>resources/connect.png</file>
     </qresource>
 </RCC>

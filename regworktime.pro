@@ -17,18 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    console.cpp \
     employee.cpp \
     iperson.cpp \
     main.cpp \
     regworktime.cpp \
-    serialportmonitor.cpp \
     superior.cpp
 
 HEADERS += \
+    console.h \
     employee.h \
     iperson.h \
     regworktime.h \
-    serialportmonitor.h \
     superior.h
 
 FORMS += \
