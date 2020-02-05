@@ -24,7 +24,7 @@ bool Superior::login()
     {
         QSqlQuery query(QSqlDatabase::database("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=regworktime;"));
 
-        query.prepare("SELECT * FROM superior WHERE superior_login = :superior_login AND superior_password = :superior_password");
+        query.prepare("SELECT * FROM employee WHERE superior_login = :superior_login AND superior_password = :superior_password");
         query.bindValue(":superior_login",superior_login);
         query.bindValue(":superior_password",superior_password);
 
@@ -42,8 +42,8 @@ bool Superior::login()
         {
             while(query.next())
             {
-                QString superior_loginFromDB = query.value(3).toString();
-                QString superior_passwordFromDB = query.value(4).toString();
+                QString superior_loginFromDB = query.value(7).toString();
+                QString superior_passwordFromDB = query.value(8).toString();
                 if(superior_loginFromDB == superior_login && superior_passwordFromDB == superior_password)
                 {
 

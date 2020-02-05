@@ -209,25 +209,19 @@ void Regworktime::on_CheckPresenceButton_clicked()
         {
             model->setQuery(query);
             ui->PresenceView->setModel(model);
-
         }
-
-
 
      }
 
 }
-
-
-
 
 void Regworktime::on_buttonAddEmployee_clicked()
 {
     QSqlDatabase db = QSqlDatabase::database();
     Employee employee(ui->fieldName->text(),
                       ui->fieldSurname->text(),
-                      ui->fieldPhone->text(),
-                      ui->fieldDate->date());
+                      ui->fieldPhone->text()
+                      );
 
     QString dateFormat = "yyyy-MM-dd";
     QString dateString = employee.date_of_employment.toString(dateFormat);
@@ -245,8 +239,7 @@ void Regworktime::on_buttonAddEmployee_clicked()
             QMessageBox::information(this,"Sukces","Dodano pracownika do bazy danych");
             ui->fieldName->clear();
             ui->fieldSurname->clear();
-            ui->fieldPhone->clear();
-            ui->fieldDate->clear();
+            ui->fieldPhone->clear();     
             db.close();
         }
         else
@@ -330,5 +323,105 @@ void Regworktime::on_buttonEditEmployee_clicked()
     }
 
 
+
+}
+
+void Regworktime::on_GetEmployeeListschedule_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+
+    if(db.open())
+    {
+        QSqlQueryModel* model = new QSqlQueryModel ;
+        model->setQuery("SELECT employee_name, employee_surname FROM employee");
+        model->setHeaderData(0,Qt::Horizontal,tr("Imię"));
+        model->setHeaderData(1,Qt::Horizontal,tr("Nazwisko"));
+
+        QTableView* view = new QTableView ;
+        view->setSelectionBehavior(QAbstractItemView::SelectColumns);
+        view->setSelectionMode(QAbstractItemView::SingleSelection);
+        ui->scheduleGetEmployeeList->setModel(model);
+        ui->scheduleGetEmployeeList->setView(view);
+    }
+
+}
+
+void Regworktime::on_scheduleGetEmployeeList_currentIndexChanged(const QString &arg1)
+{
+    QString name = ui->scheduleGetEmployeeList->currentText();
+    QSqlDatabase db = QSqlDatabase::database();
+
+    QSqlQuery query ;
+    query.prepare("SELECT * FROM employee WHERE employee_name = '"+name+"'");
+    if(query.exec())
+    {
+        while(query.next())
+        {
+           ui->scheduleEmployeeId->setText(query.value(0).toString());
+           ui->scheduleName->setText(query.value(2).toString());
+           ui->scheduleSurname->setText(query.value(3).toString());
+        }
+    }
+
+}
+
+void Regworktime::on_addSchedulebutton_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery scheduleQuery ;
+    QSqlQuery checkQuery;
+    QString dateFormat = "yyyy-MM-dd";
+    QString id = ui->scheduleEmployeeId->text();
+    QDate startDate = ui->workstartDate->date();
+    QTime startTime = ui->workstartTime->time();
+    QTime endTime = ui->workendTime->time();
+
+
+   checkQuery.prepare("SELECT COUNT(work_start_date)  FROM schedule WHERE employee_id = '"+id+"' AND  work_start_date = '"+startDate.toString(dateFormat)+"'");
+    checkQuery.exec();
+    qDebug() << checkQuery.first();
+    qDebug() << checkQuery.value("COUNT(work_start_date)").toString();
+   qDebug() << "COUNT: "  << "ID: " << id << "date: " << startDate;
+
+   //scheduleQuery.prepare("INSERT INTO schedule (employee_id, emp_employee_id,employee_status_id, work_start_date,work_start_time, work_end_time)"
+   //                       "VALUES ('"+id+"','2',NULL, '"+startDate.toString(dateFormat)+"', '"+startTime.toString()+"','"+endTime.toString()+"') ");
+
+        if(checkQuery.exec())
+        {
+            QMessageBox::information(this,"Sukces","Zapis w grafiku dodany poprawnie");
+        }
+        else
+        {
+            QMessageBox::critical(this,"Błąd",scheduleQuery.lastError().text());
+        }
+
+
+
+
+}
+
+void Regworktime::on_editSchedulebutton_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery editScheduleQuery;
+    QString dateFormat = "yyyy-MM-dd";
+    QString id = ui->scheduleEmployeeId->text();
+    QDate startDate = ui->workstartDate->date();
+    QTime startTime = ui->workstartTime->time();
+    QTime endTime = ui->workendTime->time();
+
+    editScheduleQuery.prepare("UPDATE schedule SET work_start_date = '"+startDate.toString(dateFormat)+"', work_start_time = '"+startTime.toString(dateFormat)+"' "
+                              " work_end_time = '"+endTime.toString()+"' WHERE employee_id = '"+id+"' AND work_start_date = '"+startDate.toString(dateFormat)+"' ");
+
+    if(editScheduleQuery.exec())
+    {
+        QMessageBox::information(this,"Sukces","Pomyślnie edytowałeś zapis w grafiku");
+
+    }
+    else
+    {
+        QMessageBox::critical(this,"Błąd",editScheduleQuery.lastError().text());
+        qDebug() << id << " " << startDate.toString(dateFormat) << " " << startTime.toString() <<  " " << endTime.toString() ;
+    }
 
 }

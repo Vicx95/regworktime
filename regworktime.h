@@ -79,6 +79,14 @@ private slots:
     void on_buttonEditEmployee_clicked();
 
 
+    void on_GetEmployeeListschedule_clicked();
+
+    void on_scheduleGetEmployeeList_currentIndexChanged(const QString &arg1);
+
+    void on_addSchedulebutton_clicked();
+
+    void on_editSchedulebutton_clicked();
+
 private:
     Ui::Regworktime *ui;
     Console* console = nullptr;
