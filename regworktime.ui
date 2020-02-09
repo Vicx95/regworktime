@@ -328,9 +328,9 @@ background-color: #66c011;
      <property name="geometry">
       <rect>
        <x>420</x>
-       <y>200</y>
+       <y>90</y>
        <width>361</width>
-       <height>461</height>
+       <height>541</height>
       </rect>
      </property>
      <property name="font">
@@ -371,7 +371,7 @@ background-color: #66c011;
         <x>10</x>
         <y>230</y>
         <width>344</width>
-        <height>181</height>
+        <height>260</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -390,7 +390,11 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldName"/>
+          <widget class="QLineEdit" name="fieldName">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -409,7 +413,14 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldSurname"/>
+          <widget class="QLineEdit" name="fieldSurname">
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -428,7 +439,14 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldPhone"/>
+          <widget class="QLineEdit" name="fieldPhone">
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -447,7 +465,14 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldCardID"/>
+          <widget class="QLineEdit" name="fieldCardID">
+           <property name="inputMethodHints">
+            <set>Qt::ImhPreferNumbers</set>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -487,13 +512,91 @@ background-color: #66c011;
          </item>
         </layout>
        </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_20">
+         <item>
+          <widget class="QLabel" name="labelLogin">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string> Login</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="fieldLogin">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_21">
+         <item>
+          <widget class="QLabel" name="labelPassword">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Hasło</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="fieldPassword">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_22">
+         <item>
+          <widget class="QLabel" name="labelRepeatPassword">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Powtórz hasło</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="fieldRepeatPassword">
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
       </layout>
      </widget>
      <widget class="QPushButton" name="buttonAddEmployee">
       <property name="geometry">
        <rect>
         <x>101</x>
-        <y>420</y>
+        <y>500</y>
         <width>161</width>
         <height>31</height>
        </rect>
@@ -1103,5 +1206,198 @@ background-color: #66c011;
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>fieldLogin</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>633</x>
+     <y>598</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>fieldLogin</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>633</x>
+     <y>598</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>labelLogin</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>labelPassword</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>fieldPassword</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>630</x>
+     <y>631</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>fieldRepeatPassword</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>669</x>
+     <y>664</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>labelRepeatPassword</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>496</x>
+     <y>665</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>labelLogin</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>labelPassword</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>fieldPassword</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>630</x>
+     <y>631</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>labelRepeatPassword</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>496</x>
+     <y>665</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>fieldRepeatPassword</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>669</x>
+     <y>664</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

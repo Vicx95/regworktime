@@ -218,37 +218,96 @@ void Regworktime::on_CheckPresenceButton_clicked()
 void Regworktime::on_buttonAddEmployee_clicked()
 {
     QSqlDatabase db = QSqlDatabase::database();
-    Employee employee(ui->fieldName->text(),
-                      ui->fieldSurname->text(),
-                      ui->fieldPhone->text()
-                      );
 
-    QString dateFormat = "yyyy-MM-dd";
-    QString dateString = employee.date_of_employment.toString(dateFormat);
-
-    if(db.open())
+    if(ui->radioButtonEmployee->isChecked())
     {
+        Employee employee(ui->fieldName->text(),
+                          ui->fieldSurname->text(),
+                          ui->fieldPhone->text(),
+                          ui->fieldCardID->text()
+                          );
+        if(employee.name.isEmpty() && employee.surname.isEmpty()&& employee.phone_number.isEmpty()&& employee.card_number.isEmpty() )
+            QMessageBox::critical(this,"Błąd","Wszystkie pola muszą być wypełnione");
 
-        QSqlQuery query(QSqlDatabase::database("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=regworktime;"));
-
-        query.prepare("INSERT INTO employee SET employee_name = '"+employee.name+"', employee_surname = '"+employee.surname+"', phone_number ='"+employee.phone_number+"',"
-                      "date_of_employment = '"+dateString+"' ");
-
-        if(query.exec())
+        if(db.open())
         {
-            QMessageBox::information(this,"Sukces","Dodano pracownika do bazy danych");
-            ui->fieldName->clear();
-            ui->fieldSurname->clear();
-            ui->fieldPhone->clear();     
-            db.close();
+
+            QSqlQuery addEmployeeQuery;
+            addEmployeeQuery.prepare("INSERT INTO employee SET employee_name = '"+employee.name+"', employee_surname = '"+employee.surname+"', employee_phone ='"+employee.phone_number+"',"
+                          "employee_card_id = '"+employee.card_number+"' ");
+            if(addEmployeeQuery.exec())
+            {
+                QMessageBox::information(this,"Sukces","Dodano pracownika do bazy danych");
+                ui->fieldName->clear();
+                ui->fieldSurname->clear();
+                ui->fieldPhone->clear();
+                ui->fieldCardID->clear();
+                db.close();
+            }
+            else
+            {
+                QMessageBox::critical(this,tr("Błąd"),"Istnieje już taki pracownik");
+                 db.close();
+            }
+
+         }
+    }
+
+    else if(ui->radioButtonSuperior->isChecked())
+    {
+        QString makeLogin = ui->fieldName->text()[0]+ ui->fieldSurname->text();
+        ui->fieldLogin->setText(makeLogin);
+
+
+        Superior superior(ui->fieldName->text(),
+                          ui->fieldSurname->text(),
+                          ui->fieldPhone->text(),
+                          ui->fieldCardID->text(),
+                          ui->fieldLogin->text(),
+                          ui->fieldPassword->text(),
+                          ui->fieldRepeatPassword->text());
+        if(superior.superior_name.isEmpty() && superior.superior_surname.isEmpty()&&
+           superior.phone_number.isEmpty() && superior.card_number.isEmpty()&&
+           superior.getPassword().isEmpty() && superior.getRepeatPassword().isEmpty()
+           )
+            QMessageBox::critical(this,"Błąd","Wszystkie pola muszą być wypełnione");
+
+        if(ui->fieldPassword->text() == ui->fieldRepeatPassword->text())
+        {
+
+            QByteArray hashPassword =(superior.getPassword().toStdString().c_str());
+
+            hashPassword = QCryptographicHash::hash(hashPassword,QCryptographicHash::Sha512).toHex();
+            QString password = QString::fromStdString(hashPassword.toStdString());
+            QSqlQuery addSuperiorQuery;
+            addSuperiorQuery.prepare("INSERT INTO employee SET employee_name='"+superior.superior_name+"', employee_surname='"+superior.superior_surname+"',"
+                                "employee_phone ='"+superior.phone_number+"', employee_card_id = '"+superior.card_number+"', superior_login= '"+superior.getLogin()+"', superior_password='"+password+"' ");
+                if(addSuperiorQuery.exec())
+                {
+                    QMessageBox::information(this,"Sukces","Dodano przełożonego do bazy danych");
+                    ui->fieldName->clear();
+                    ui->fieldSurname->clear();
+                    ui->fieldPhone->clear();
+                    ui->fieldCardID->clear();
+                    ui->fieldLogin->clear();
+                    ui->fieldPassword->clear();
+                    ui->fieldRepeatPassword->clear();
+                }
+                else
+                {
+                    QMessageBox::critical(this,"Błąd","Istnieje już taki pracownik");
+                }
         }
         else
         {
-           QMessageBox::critical(this,tr("Error::"),query.lastError().text());
-             db.close();
+            QMessageBox::critical(this,"Błąd","Hasła muszą być takie same");
         }
+    }
 
-     }
+
+
+
+
 
 }
 
@@ -300,7 +359,7 @@ void Regworktime::on_buttonEditEmployee_clicked()
 {
     QSqlDatabase db = QSqlDatabase::database();
 
-    Employee editEmployee(ui->idLineEdit->text().toInt(),
+    /*Employee editEmployee(ui->idLineEdit->text().toInt(),
                           ui->fieldeditName->text(),
                           ui->fieldeditSurname->text(),
                           ui->fieldeditPhone->text(),
@@ -322,7 +381,7 @@ void Regworktime::on_buttonEditEmployee_clicked()
         QMessageBox::critical(this,tr("Błąd"),editQuery.lastError().text());
     }
 
-
+*/
 
 }
 
@@ -423,5 +482,21 @@ void Regworktime::on_editSchedulebutton_clicked()
         QMessageBox::critical(this,"Błąd",editScheduleQuery.lastError().text());
         qDebug() << id << " " << startDate.toString(dateFormat) << " " << startTime.toString() <<  " " << endTime.toString() ;
     }
+
+}
+
+
+void Regworktime::on_radioButtonEmployee_clicked()
+{
+        ui->fieldLogin->setReadOnly(true);
+        ui->fieldPassword->setReadOnly(true);
+        ui->fieldRepeatPassword->setReadOnly(true);
+}
+
+void Regworktime::on_radioButtonSuperior_clicked()
+{
+    ui->fieldLogin->setReadOnly(true);
+    ui->fieldPassword->setReadOnly(false);
+    ui->fieldRepeatPassword->setReadOnly(false);
 
 }

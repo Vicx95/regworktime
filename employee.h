@@ -9,8 +9,8 @@ class Employee : public Person
 
 
 public:
-    Employee(int id, QString _name, QString _surname, QString _phone_number, QDate _date);
-    Employee(QString _name, QString _surname, QString _phone_number);
+    Employee(int id, QString _name, QString _surname, QString _phone_number, int _card_number);
+    Employee(QString _name, QString _surname, QString _phone_number,QString _card_number);
 
     void add() override;
     void edit() override;
@@ -22,7 +22,7 @@ public:
     QString name ;
     QString surname;
     QString phone_number;
-    QDate date_of_employment;
+    QString card_number;
 };
 
 #endif // EMPLOYEE_H

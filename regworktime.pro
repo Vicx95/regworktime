@@ -20,6 +20,7 @@ SOURCES += \
     console.cpp \
     employee.cpp \
     iperson.cpp \
+    loginstatus.cpp \
     main.cpp \
     regworktime.cpp \
     superior.cpp
@@ -28,6 +29,7 @@ HEADERS += \
     console.h \
     employee.h \
     iperson.h \
+    loginstatus.h \
     regworktime.h \
     superior.h
 

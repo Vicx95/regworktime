@@ -11,6 +11,8 @@
 #include <QObject>
 #include <QToolBar>
 #include <QSerialPort>
+#include <QRegularExpression>
+#include <QCryptographicHash>
 
 #include "console.h"
 QT_BEGIN_NAMESPACE
@@ -86,6 +88,12 @@ private slots:
     void on_addSchedulebutton_clicked();
 
     void on_editSchedulebutton_clicked();
+
+
+
+    void on_radioButtonEmployee_clicked();
+
+    void on_radioButtonSuperior_clicked();
 
 private:
     Ui::Regworktime *ui;
