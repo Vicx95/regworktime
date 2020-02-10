@@ -13,6 +13,7 @@
 #include <QSerialPort>
 #include <QRegularExpression>
 #include <QCryptographicHash>
+#include "loginstatus.h"
 
 #include "console.h"
 QT_BEGIN_NAMESPACE
@@ -47,16 +48,6 @@ private slots:
 
     void on_LogoutButton_clicked();
 
-    void on_backtoMenufromaddEmployee_clicked();
-
-    void on_backToMenuFromEditEmployee_clicked();
-
-    void on_backToMenuFromSchedule_clicked();
-
-    void on_backToMenuFromPresence_clicked();
-
-    void on_backToMenuFromReport_clicked();
-
     void on_LoginButton_clicked();
 
     void on_addemployee_Button_clicked();
@@ -90,10 +81,11 @@ private slots:
     void on_editSchedulebutton_clicked();
 
 
-
     void on_radioButtonEmployee_clicked();
 
     void on_radioButtonSuperior_clicked();
+
+    void on_backtoMenu_clicked();
 
 private:
     Ui::Regworktime *ui;

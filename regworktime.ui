@@ -33,7 +33,7 @@
 }</string>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>7</number>
    </property>
    <widget class="QWidget" name="loginPage">
     <widget class="QWidget" name="securityIcon" native="true">
@@ -620,19 +620,6 @@ background-color: #66c011;
       </property>
      </widget>
     </widget>
-    <widget class="QPushButton" name="backtoMenufromaddEmployee">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Menu</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="editemployeePage">
     <widget class="QGroupBox" name="formEditemployee">
@@ -798,23 +785,19 @@ background-color: #66c011;
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_18">
          <item>
-          <widget class="QLabel" name="labelDateofemployment_2">
+          <widget class="QLabel" name="labelCardIDEdit">
            <property name="font">
             <font>
              <pointsize>16</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>Data zatrudnienia</string>
+            <string>Numer karty</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="fieldeditDate">
-           <property name="displayFormat">
-            <string>yyyy-MM-dd</string>
-           </property>
-          </widget>
+          <widget class="QLineEdit" name="fieldeditCardID"/>
          </item>
         </layout>
        </item>
@@ -848,34 +831,8 @@ background-color: #66c011;
       </property>
      </widget>
     </widget>
-    <widget class="QPushButton" name="backToMenuFromEditEmployee">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>10</y>
-       <width>80</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Menu</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="schedulePage">
-    <widget class="QPushButton" name="backToMenuFromSchedule">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>80</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Menu</string>
-     </property>
-    </widget>
     <widget class="QGroupBox" name="scheduleForm">
      <property name="geometry">
       <rect>
@@ -1122,19 +1079,6 @@ background-color: #66c011;
     </widget>
    </widget>
    <widget class="QWidget" name="presencePage">
-    <widget class="QPushButton" name="backToMenuFromPresence">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>10</y>
-       <width>80</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Menu</string>
-     </property>
-    </widget>
     <widget class="QTableView" name="PresenceView">
      <property name="geometry">
       <rect>
@@ -1176,18 +1120,239 @@ background-color: #66c011;
 }</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="backToMenuFromReport">
+   </widget>
+   <widget class="QWidget" name="manualregisterPage">
+    <widget class="QGroupBox" name="manualRegisterForm">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>80</width>
-       <height>21</height>
+       <x>370</x>
+       <y>130</y>
+       <width>481</width>
+       <height>521</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Menu</string>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">#manualRegisterForm{
+	background:rgb(255,170,0);
+	border-radius: 20px;
+	
+}</string>
+     </property>
+     <property name="title">
+      <string>Ręczna rejestracja</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_9">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <item>
+           <widget class="QLabel" name="getEmployeeLabel">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Wybierz pracownika</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="manualRegisterGetEmployeeList">
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="GetEmployeeListManualRegister">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_24">
+          <item>
+           <widget class="QLabel" name="label_10">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>ID</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="manualRegisterId">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_25">
+          <item>
+           <widget class="QLabel" name="label_11">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Imię</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="manualRegisterName">
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_26">
+          <item>
+           <widget class="QLabel" name="label_12">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nazwisko</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="manualRegisterSurname">
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_27">
+          <item>
+           <widget class="QLabel" name="workStartDatelabel_2">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Data rozpoczęcia pracy</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="workstartDatemanualRegister">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="displayFormat">
+             <string>yyyy-MM-dd</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_28">
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Godzina rozpoczęcia</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTimeEdit" name="workstartTimemanualRegister">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_29">
+          <item>
+           <widget class="QLabel" name="label_14">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Godzina zakończenia</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTimeEdit" name="workendTimemanualRegister">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_30">
+          <item>
+           <widget class="QPushButton" name="addManualRegister">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Dodaj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>
@@ -1201,6 +1366,32 @@ background-color: #66c011;
     </rect>
    </property>
    <widget class="QWidget" name="dockWidgetContents"/>
+  </widget>
+  <widget class="QLabel" name="loginStatus">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>[+]status</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="backtoMenu">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Menu</string>
+   </property>
   </widget>
  </widget>
  <resources>

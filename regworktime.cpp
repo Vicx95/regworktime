@@ -14,9 +14,11 @@ Regworktime::Regworktime(QWidget *parent)
 
 {
     ui->setupUi(this);
+    ui->loginStatus->setVisible(false);
+    ui->backtoMenu->setVisible(false);
     ui->stackedWidget->setCurrentIndex(0);
 
-
+    ui->workstartDate->setDate(QDate::currentDate());
     auto toolbar = new QToolBar();
     toolbar->addAction("Połącz",this,SLOT(openSerialPort()));
     toolbar->setStyleSheet("QToolBar {border:10 px solid blue}");
@@ -76,6 +78,7 @@ void Regworktime::openSerialPort()
 }
 
 
+
 void Regworktime::closeSerialPort()
 {
     if(serialPortMonitor->isOpen())
@@ -120,6 +123,11 @@ void Regworktime::on_LoginButton_clicked()
      else if(superior.login() == true)
      {
          ui->stackedWidget->setCurrentIndex(1);
+         ui->loginStatus->setVisible(true);
+         ui->loginStatus->setText("Jesteś zalogowany jako: " + superior_login);
+         ui->backtoMenu->setVisible(true);
+         ui->UserloginField->clear();
+         ui->PasswordField->clear();
      }
      else
      {
@@ -131,37 +139,9 @@ void Regworktime::on_LoginButton_clicked()
 void Regworktime::on_LogoutButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    ui->loginStatus->clear();
+    ui->backtoMenu->setVisible(false);
 }
-
-void Regworktime::on_backtoMenufromaddEmployee_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void Regworktime::on_backToMenuFromEditEmployee_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-
-
-void Regworktime::on_backToMenuFromSchedule_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void Regworktime::on_backToMenuFromPresence_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void Regworktime::on_backToMenuFromReport_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-
-
 
 void Regworktime::on_addemployee_Button_clicked()
 {
@@ -199,7 +179,7 @@ void Regworktime::on_CheckPresenceButton_clicked()
         QSqlQueryModel *model = new QSqlQueryModel();
 
         QSqlQuery query(QSqlDatabase::database("Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=regworktime;"));
-        query.prepare("SELECT * FROM employee  WHERE is_present = 1 ");
+        query.prepare("SELECT * FROM employee_status  WHERE is_present = 1 ");
         query.bindValue(":is_present",presence);
         if(!query.exec())
         {
@@ -346,10 +326,10 @@ void Regworktime::on_GetEmployeeComboBox_currentIndexChanged(const QString &arg1
         while(query.next())
         {
            ui->idLineEdit->setText(query.value(0).toString());
-           ui->fieldeditName->setText(query.value(1).toString());
-           ui->fieldeditSurname->setText(query.value(2).toString());
-           ui->fieldeditPhone->setText(query.value(3).toString());
-           ui->fieldeditDate->setDate(query.value(5).toDate());
+           ui->fieldeditName->setText(query.value(2).toString());
+           ui->fieldeditSurname->setText(query.value(3).toString());
+           ui->fieldeditPhone->setText(query.value(4).toString());
+           ui->fieldeditCardID->setText(query.value(5).toString());
         }
     }
 
@@ -359,30 +339,24 @@ void Regworktime::on_buttonEditEmployee_clicked()
 {
     QSqlDatabase db = QSqlDatabase::database();
 
-    /*Employee editEmployee(ui->idLineEdit->text().toInt(),
+   Employee editEmployee(ui->idLineEdit->text(),
                           ui->fieldeditName->text(),
                           ui->fieldeditSurname->text(),
                           ui->fieldeditPhone->text(),
-                          ui->fieldeditDate->date());
-
-    QString dateFormat = "yyyy-MM-dd";
-
+                          ui->fieldeditCardID->text()
+                          );
     QSqlQuery editQuery;
     editQuery.prepare("UPDATE employee SET employee_name = '"+editEmployee.name+"'"
-                      ", employee_surname = '"+editEmployee.surname+"', phone_number = '"+editEmployee.phone_number+"'"
-                      ",date_of_employment = '"+editEmployee.date_of_employment.toString(dateFormat)+"' WHERE employee_id = :employee_id ");
-    editQuery.bindValue(":employee_id",editEmployee.id);
+                      ", employee_surname = '"+editEmployee.surname+"', employee_phone = '"+editEmployee.phone_number+"'"
+                      ",employee_card_id = '"+editEmployee.card_number+"' WHERE employee_id = '"+editEmployee.id+"'");
     if(editQuery.exec())
     {
         QMessageBox::information(this,"Sukces","Edycja danych zakończyła się powodzeniem");
     }
     else
     {
-        QMessageBox::critical(this,tr("Błąd"),editQuery.lastError().text());
+        QMessageBox::critical(this,tr("Błąd"),"Istnieje już taki pracownik");
     }
-
-*/
-
 }
 
 void Regworktime::on_GetEmployeeListschedule_clicked()
@@ -428,35 +402,30 @@ void Regworktime::on_addSchedulebutton_clicked()
 {
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery scheduleQuery ;
-    QSqlQuery checkQuery;
     QString dateFormat = "yyyy-MM-dd";
     QString id = ui->scheduleEmployeeId->text();
     QDate startDate = ui->workstartDate->date();
     QTime startTime = ui->workstartTime->time();
     QTime endTime = ui->workendTime->time();
+    QDate currentDate = QDate::currentDate();
 
-
-   checkQuery.prepare("SELECT COUNT(work_start_date)  FROM schedule WHERE employee_id = '"+id+"' AND  work_start_date = '"+startDate.toString(dateFormat)+"'");
-    checkQuery.exec();
-    qDebug() << checkQuery.first();
-    qDebug() << checkQuery.value("COUNT(work_start_date)").toString();
-   qDebug() << "COUNT: "  << "ID: " << id << "date: " << startDate;
-
-   //scheduleQuery.prepare("INSERT INTO schedule (employee_id, emp_employee_id,employee_status_id, work_start_date,work_start_time, work_end_time)"
-   //                       "VALUES ('"+id+"','2',NULL, '"+startDate.toString(dateFormat)+"', '"+startTime.toString()+"','"+endTime.toString()+"') ");
-
-        if(checkQuery.exec())
-        {
-            QMessageBox::information(this,"Sukces","Zapis w grafiku dodany poprawnie");
-        }
-        else
-        {
-            QMessageBox::critical(this,"Błąd",scheduleQuery.lastError().text());
-        }
-
-
-
-
+    if(startDate < currentDate)
+    {
+         QMessageBox::critical(this,"Błąd","Niepoprawna data");
+    }
+    else
+    {
+        scheduleQuery.prepare("INSERT INTO employee_schedule (employee_id, emp_employee_id,employee_status_id, work_start_date,work_start_time, work_end_time)"
+                         "VALUES ('"+id+"','12',NULL, '"+startDate.toString(dateFormat)+"', '"+startTime.toString()+"','"+endTime.toString()+"') ");
+            if(scheduleQuery.exec())
+            {
+                QMessageBox::information(this,"Sukces","Zapis w grafiku dodany poprawnie");
+            }
+            else
+            {
+                QMessageBox::critical(this,"Błąd","Pracownik ma już ustawiony grafik na ten dzień");
+            }
+    }
 }
 
 void Regworktime::on_editSchedulebutton_clicked()
@@ -469,8 +438,8 @@ void Regworktime::on_editSchedulebutton_clicked()
     QTime startTime = ui->workstartTime->time();
     QTime endTime = ui->workendTime->time();
 
-    editScheduleQuery.prepare("UPDATE schedule SET work_start_date = '"+startDate.toString(dateFormat)+"', work_start_time = '"+startTime.toString(dateFormat)+"' "
-                              " work_end_time = '"+endTime.toString()+"' WHERE employee_id = '"+id+"' AND work_start_date = '"+startDate.toString(dateFormat)+"' ");
+    editScheduleQuery.prepare("UPDATE employee_schedule SET work_start_date = '"+startDate.toString(dateFormat)+"', work_start_time = '"+startTime.toString(dateFormat)+"' "
+                              ", work_end_time = '"+endTime.toString()+"' WHERE employee_id = '"+id+"' AND work_start_date = '"+startDate.toString(dateFormat)+"' ");
 
     if(editScheduleQuery.exec())
     {
@@ -480,7 +449,7 @@ void Regworktime::on_editSchedulebutton_clicked()
     else
     {
         QMessageBox::critical(this,"Błąd",editScheduleQuery.lastError().text());
-        qDebug() << id << " " << startDate.toString(dateFormat) << " " << startTime.toString() <<  " " << endTime.toString() ;
+
     }
 
 }
@@ -499,4 +468,9 @@ void Regworktime::on_radioButtonSuperior_clicked()
     ui->fieldPassword->setReadOnly(false);
     ui->fieldRepeatPassword->setReadOnly(false);
 
+}
+
+void Regworktime::on_backtoMenu_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
 }

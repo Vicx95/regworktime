@@ -12,6 +12,12 @@ Superior::Superior(QString name, QString surname,QString phone, QString card_num
 
 }
 
+Superior::Superior(QString id, QString name, QString surname): superior_name(name), superior_surname(surname), superior_id(id)
+{
+
+}
+
+
 void Superior::add()
 {
 

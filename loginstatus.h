@@ -1,17 +1,14 @@
 #ifndef LOGINSTATUS_H
 #define LOGINSTATUS_H
 #include <QString>
-
+#include "superior.h"
 class LoginStatus
 {
 private:
-    static QString name;
-    static QString surname;
-    static QString id;
-public:
-    LoginStatus();
 
-    QString WhoIsLoggedNow();
+public:
+     LoginStatus() {}
+
 };
 
 #endif // LOGINSTATUS_H
