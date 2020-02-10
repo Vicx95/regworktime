@@ -32,14 +32,17 @@ bool Superior::login()
 {
     bool success = false;
     QSqlDatabase db = QSqlDatabase::database();
+
     if(db.open())
     {
         QSqlQuery query;
-      QByteArray hashPassword =(superior_password.toStdString().c_str());
-      hashPassword = QCryptographicHash::hash(hashPassword,QCryptographicHash::Sha512).toHex();
-      superior_password = QString::fromStdString(hashPassword.toStdString());
+        QByteArray hashPassword =(superior_password.toStdString().c_str());
+        hashPassword = QCryptographicHash::hash(hashPassword,QCryptographicHash::Sha512).toHex();
+        superior_password = QString::fromStdString(hashPassword.toStdString());
 
         query.prepare("SELECT * FROM employee WHERE superior_login = '"+superior_login+"' AND superior_password = '"+superior_password+"'");
+
+
 
         QMessageBox msgBox;
 
@@ -62,6 +65,7 @@ bool Superior::login()
                 {
 
                    success = true ;
+
                 }
                 else
                 {

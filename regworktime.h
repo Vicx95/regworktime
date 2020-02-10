@@ -87,6 +87,14 @@ private slots:
 
     void on_backtoMenu_clicked();
 
+    void on_manualRegisterButton_clicked();
+
+    void on_addManualRegister_clicked();
+
+    void on_GetEmployeeListManualRegister_clicked();
+
+    void on_manualRegisterGetEmployeeList_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::Regworktime *ui;
     Console* console = nullptr;

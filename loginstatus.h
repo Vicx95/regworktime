@@ -7,7 +7,12 @@ class LoginStatus
 private:
 
 public:
-     LoginStatus() {}
+
+    LoginStatus()   {}
+
+
+     ~LoginStatus() {}
+
 
 };
 

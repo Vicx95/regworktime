@@ -5,6 +5,7 @@
 #include "employee.h"
 
 #include <QFileInfo>
+
 Regworktime::Regworktime(QWidget *parent)
     : QWidget(parent),
       ui(new Ui::Regworktime),
@@ -124,7 +125,7 @@ void Regworktime::on_LoginButton_clicked()
      {
          ui->stackedWidget->setCurrentIndex(1);
          ui->loginStatus->setVisible(true);
-         ui->loginStatus->setText("Jesteś zalogowany jako: " + superior_login);
+         ui->loginStatus->setText(superior_login);
          ui->backtoMenu->setVisible(true);
          ui->UserloginField->clear();
          ui->PasswordField->clear();
@@ -415,10 +416,21 @@ void Regworktime::on_addSchedulebutton_clicked()
     }
     else
     {
+        QSqlQuery employeeStatusQuery;
+        QSqlQuery employeeStatusIDUpdate;
         scheduleQuery.prepare("INSERT INTO employee_schedule (employee_id, emp_employee_id,employee_status_id, work_start_date,work_start_time, work_end_time)"
                          "VALUES ('"+id+"','12',NULL, '"+startDate.toString(dateFormat)+"', '"+startTime.toString()+"','"+endTime.toString()+"') ");
             if(scheduleQuery.exec())
             {
+                employeeStatusQuery.prepare("INSERT INTO employee_status SET schedule_id = (SELECT schedule_id FROM employee_schedule WHERE employee_id = '"+id+"' AND work_start_date = '"+startDate.toString(dateFormat)+"')"
+                                       ",is_present = '0' , date = '"+startDate.toString(dateFormat)+"' ");
+                employeeStatusQuery.exec();
+                employeeStatusIDUpdate.prepare("UPDATE employee_schedule SET employee_status_id = "
+                                      "(SELECT employee_status.employee_status_id FROM employee_schedule INNER JOIN employee_status ON "
+                                      " employee_schedule.schedule_id = employee_status.schedule_id "
+                                      " WHERE employee_schedule.work_start_date = '"+startDate.toString(dateFormat)+"') "
+                                      " WHERE employee_schedule.work_start_date = '"+startDate.toString(dateFormat)+"' ");
+                employeeStatusIDUpdate.exec();
                 QMessageBox::information(this,"Sukces","Zapis w grafiku dodany poprawnie");
             }
             else
@@ -473,4 +485,76 @@ void Regworktime::on_radioButtonSuperior_clicked()
 void Regworktime::on_backtoMenu_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+void Regworktime::on_manualRegisterButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(7);
+}
+
+void Regworktime::on_addManualRegister_clicked()
+{
+
+    QSqlDatabase db = QSqlDatabase::database();
+
+    QSqlQuery manualRegisterQuery ;
+    manualRegisterQuery.prepare("UPDATE employee_status SET employee_entrance_time = '"+ui->workstartTimemanualRegister->text()+"'"
+                                ", employee_departure_time = '"+ui->workendTimemanualRegister->text()+"'"
+                                ", number_of_card_readings = '4', break_start_time = '"+ui->breakStartTime->text()+"' "
+                                ", break_end_time = '"+ui->breakEndTime->text()+"', is_present = '1' "
+                                "WHERE date = '"+ui->workstartDatemanualRegister->text()+"'");
+
+    if(manualRegisterQuery.exec())
+    {
+        QMessageBox::information(this,"Sukces","Poprawnie zarejestrowałeś czas pracy");
+    }
+    else
+    {
+        QMessageBox::critical(this,"Błąd", manualRegisterQuery.lastError().text());
+    }
+
+}
+
+void Regworktime::on_GetEmployeeListManualRegister_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+
+    if(db.open())
+    {
+        QSqlQueryModel* model2 = new QSqlQueryModel ;
+        model2->setQuery("SELECT employee_name, employee_surname FROM employee");
+        model2->setHeaderData(0,Qt::Horizontal,tr("Imię"));
+        model2->setHeaderData(1,Qt::Horizontal,tr("Nazwisko"));
+
+        QTableView* view2 = new QTableView ;
+        view2->setSelectionBehavior(QAbstractItemView::SelectColumns);
+        view2->setSelectionMode(QAbstractItemView::SingleSelection);
+        ui->manualRegisterGetEmployeeList->setModel(model2);
+        ui->manualRegisterGetEmployeeList->setView(view2);
+    }
+}
+
+void Regworktime::on_manualRegisterGetEmployeeList_currentIndexChanged(const QString &arg1)
+{
+    //QString id = ui->manualRegisterGetEmployeeList->currentText();
+    QString name = ui->manualRegisterGetEmployeeList->currentText();
+    QSqlDatabase db = QSqlDatabase::database();
+
+    QSqlQuery query ;
+    query.prepare("SELECT * FROM employee WHERE employee_name = '"+name+"'");
+    if(query.exec())
+    {
+        while(query.next())
+        {
+           ui->manualRegisterId->setText(query.value(0).toString());
+           ui->manualRegisterName->setText(query.value(2).toString());
+           ui->manualRegisterSurname->setText(query.value(3).toString());
+           ui->workstartDatemanualRegister->setDate(QDate::currentDate());
+           ui->workstartTimemanualRegister->setTime(QTime(6,0,0));
+           ui->workendTimemanualRegister->setTime(QTime(14,0,0));
+           ui->breakStartTime->setTime(QTime(10,0,0));
+           ui->breakEndTime->setTime(QTime(10,30,0));
+        }
+    }
+
 }

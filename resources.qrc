@@ -10,5 +10,6 @@
         <file>resources/worker_presence.png</file>
         <file>resources/application-exit.png</file>
         <file>resources/connect.png</file>
+        <file>resources/scheduleplus.png</file>
     </qresource>
 </RCC>

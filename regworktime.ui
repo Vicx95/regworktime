@@ -261,8 +261,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="presence_Button">
      <property name="geometry">
       <rect>
-       <x>810</x>
-       <y>260</y>
+       <x>370</x>
+       <y>460</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -286,8 +286,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="reportButton">
      <property name="geometry">
       <rect>
-       <x>490</x>
-       <y>440</y>
+       <x>600</x>
+       <y>460</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -320,6 +320,31 @@ background-color: #66c011;
      </property>
      <property name="text">
       <string>Wyloguj</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="manualRegisterButton">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>460</y>
+       <width>201</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#manualRegisterButton{
+	
+	border-image: url(:/img/resources/scheduleplus.png);	
+}</string>
+     </property>
+     <property name="text">
+      <string>Ręczna rejestracja 
+czasu pracy</string>
      </property>
     </widget>
    </widget>
@@ -1126,14 +1151,14 @@ background-color: #66c011;
      <property name="geometry">
       <rect>
        <x>370</x>
-       <y>130</y>
-       <width>481</width>
-       <height>521</height>
+       <y>17</y>
+       <width>489</width>
+       <height>661</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>20</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -1335,6 +1360,75 @@ background-color: #66c011;
          </layout>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_31">
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Start przerwy</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTimeEdit" name="breakStartTime">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_32">
+          <item>
+           <widget class="QLabel" name="label_15">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Koniec przerwy</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTimeEdit" name="breakEndTime">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_33">
+          <item>
+           <widget class="QLabel" name="label_16">
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Powód rejestracji</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="registerReason"/>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_30">
           <item>
            <widget class="QPushButton" name="addManualRegister">
@@ -1401,70 +1495,6 @@ background-color: #66c011;
   <connection>
    <sender>radioButtonEmployee</sender>
    <signal>clicked()</signal>
-   <receiver>fieldLogin</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>630</x>
-     <y>566</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>633</x>
-     <y>598</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonSuperior</sender>
-   <signal>clicked()</signal>
-   <receiver>fieldLogin</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>726</x>
-     <y>566</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>633</x>
-     <y>598</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonEmployee</sender>
-   <signal>clicked()</signal>
-   <receiver>labelLogin</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>630</x>
-     <y>566</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>460</x>
-     <y>599</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonEmployee</sender>
-   <signal>clicked()</signal>
-   <receiver>labelPassword</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>630</x>
-     <y>566</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>457</x>
-     <y>632</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonEmployee</sender>
-   <signal>clicked()</signal>
    <receiver>fieldPassword</receiver>
    <slot>hide()</slot>
    <hints>
@@ -1475,22 +1505,6 @@ background-color: #66c011;
     <hint type="destinationlabel">
      <x>630</x>
      <y>631</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButtonEmployee</sender>
-   <signal>clicked()</signal>
-   <receiver>fieldRepeatPassword</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>630</x>
-     <y>566</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>669</x>
-     <y>664</y>
     </hint>
    </hints>
   </connection>
@@ -1511,29 +1525,29 @@ background-color: #66c011;
    </hints>
   </connection>
   <connection>
-   <sender>radioButtonSuperior</sender>
+   <sender>radioButtonEmployee</sender>
    <signal>clicked()</signal>
-   <receiver>labelLogin</receiver>
-   <slot>show()</slot>
+   <receiver>fieldLogin</receiver>
+   <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>726</x>
+     <x>630</x>
      <y>566</y>
     </hint>
     <hint type="destinationlabel">
-     <x>460</x>
-     <y>599</y>
+     <x>633</x>
+     <y>598</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>radioButtonSuperior</sender>
+   <sender>radioButtonEmployee</sender>
    <signal>clicked()</signal>
    <receiver>labelPassword</receiver>
-   <slot>show()</slot>
+   <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>726</x>
+     <x>630</x>
      <y>566</y>
     </hint>
     <hint type="destinationlabel">
@@ -1577,6 +1591,70 @@ background-color: #66c011;
   <connection>
    <sender>radioButtonSuperior</sender>
    <signal>clicked()</signal>
+   <receiver>fieldLogin</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>633</x>
+     <y>598</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>labelLogin</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonEmployee</sender>
+   <signal>clicked()</signal>
+   <receiver>fieldRepeatPassword</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>669</x>
+     <y>664</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>labelLogin</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>460</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
    <receiver>fieldRepeatPassword</receiver>
    <slot>show()</slot>
    <hints>
@@ -1587,6 +1665,22 @@ background-color: #66c011;
     <hint type="destinationlabel">
      <x>669</x>
      <y>664</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButtonSuperior</sender>
+   <signal>clicked()</signal>
+   <receiver>labelPassword</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>726</x>
+     <y>566</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>457</x>
+     <y>632</y>
     </hint>
    </hints>
   </connection>

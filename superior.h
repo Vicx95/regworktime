@@ -13,7 +13,8 @@ public:
     QString card_number;
     QString superior_id;
      QString superior_login ;
-    Superior() {};
+
+    Superior() {}
     Superior(QString login, QString password) ;
     Superior(QString id, QString name, QString surname);
     Superior(QString name, QString surname,QString phone, QString card_number, QString login, QString password, QString _repeat_password);
