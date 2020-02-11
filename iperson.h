@@ -6,7 +6,7 @@ class Person
 {
 
 public:
-    explicit Person();
+    Person() ;
 
     virtual void add()  = 0;
     virtual void edit()  = 0;

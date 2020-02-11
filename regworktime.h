@@ -13,7 +13,7 @@
 #include <QSerialPort>
 #include <QRegularExpression>
 #include <QCryptographicHash>
-#include "loginstatus.h"
+#include "editregisterevent.h"
 
 #include "console.h"
 QT_BEGIN_NAMESPACE

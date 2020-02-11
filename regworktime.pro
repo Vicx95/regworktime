@@ -18,18 +18,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     console.cpp \
+    editregisterevent.cpp \
     employee.cpp \
+    event.cpp \
     iperson.cpp \
-    loginstatus.cpp \
     main.cpp \
     regworktime.cpp \
     superior.cpp
 
 HEADERS += \
     console.h \
+    editregisterevent.h \
+    editregisterevent.h \
     employee.h \
+    event.h \
     iperson.h \
-    loginstatus.h \
     regworktime.h \
     superior.h
 

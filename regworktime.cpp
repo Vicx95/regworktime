@@ -100,6 +100,9 @@ void Regworktime::readData()
 {
     const QByteArray data = serialPortMonitor->readAll();
     console->putData(data);
+
+
+
 }
 
 
@@ -207,6 +210,19 @@ void Regworktime::on_buttonAddEmployee_clicked()
                           ui->fieldPhone->text(),
                           ui->fieldCardID->text()
                           );
+        QString superiorID;
+        QString login = ui->loginStatus->text() ;
+        QSqlQuery getSuperiorLoginQuery;
+        getSuperiorLoginQuery.prepare("SELECT employee_id from employee WHERE superior_login = '"+login+"'");
+
+        if(getSuperiorLoginQuery.exec())
+        {
+            while(getSuperiorLoginQuery.next())
+            {
+                superiorID = getSuperiorLoginQuery.value(0).toString();
+            }
+        }
+
         if(employee.name.isEmpty() && employee.surname.isEmpty()&& employee.phone_number.isEmpty()&& employee.card_number.isEmpty() )
             QMessageBox::critical(this,"Błąd","Wszystkie pola muszą być wypełnione");
 
@@ -214,7 +230,7 @@ void Regworktime::on_buttonAddEmployee_clicked()
         {
 
             QSqlQuery addEmployeeQuery;
-            addEmployeeQuery.prepare("INSERT INTO employee SET employee_name = '"+employee.name+"', employee_surname = '"+employee.surname+"', employee_phone ='"+employee.phone_number+"',"
+            addEmployeeQuery.prepare("INSERT INTO employee SET emp_employee_id = '"+superiorID+"' , employee_name = '"+employee.name+"', employee_surname = '"+employee.surname+"', employee_phone ='"+employee.phone_number+"',"
                           "employee_card_id = '"+employee.card_number+"' ");
             if(addEmployeeQuery.exec())
             {
@@ -333,7 +349,6 @@ void Regworktime::on_GetEmployeeComboBox_currentIndexChanged(const QString &arg1
            ui->fieldeditCardID->setText(query.value(5).toString());
         }
     }
-
 }
 
 void Regworktime::on_buttonEditEmployee_clicked()
@@ -347,12 +362,32 @@ void Regworktime::on_buttonEditEmployee_clicked()
                           ui->fieldeditCardID->text()
                           );
     QSqlQuery editQuery;
+    QSqlQuery eventQuery;
+    QString superiorID;
+    QString login = ui->loginStatus->text() ;
+    eventQuery.prepare("SELECT employee_id from employee WHERE superior_login = '"+login+"'");
+
+    if(eventQuery.exec())
+    {
+        while(eventQuery.next())
+        {
+            superiorID = eventQuery.value(0).toString();
+        }
+    }
+     QString date = QDate::currentDate().toString();
+     QString superior = ui->loginStatus->text();
+     QString employee_id = editEmployee.id;
+    QString description = "Przełożony " + superior + " edytował dane pracownika o id " + employee_id + " dnia " + date ;
+
+    EditRegisterEvent editEvent ;
+
     editQuery.prepare("UPDATE employee SET employee_name = '"+editEmployee.name+"'"
                       ", employee_surname = '"+editEmployee.surname+"', employee_phone = '"+editEmployee.phone_number+"'"
                       ",employee_card_id = '"+editEmployee.card_number+"' WHERE employee_id = '"+editEmployee.id+"'");
     if(editQuery.exec())
     {
         QMessageBox::information(this,"Sukces","Edycja danych zakończyła się powodzeniem");
+        editEvent.saveEvent(superiorID,description);
     }
     else
     {
@@ -450,12 +485,32 @@ void Regworktime::on_editSchedulebutton_clicked()
     QTime startTime = ui->workstartTime->time();
     QTime endTime = ui->workendTime->time();
 
-    editScheduleQuery.prepare("UPDATE employee_schedule SET work_start_date = '"+startDate.toString(dateFormat)+"', work_start_time = '"+startTime.toString(dateFormat)+"' "
+    QString superiorID;
+    QString login = ui->loginStatus->text() ;
+    QSqlQuery eventEditSchedule;
+    eventEditSchedule.prepare("SELECT employee_id from employee WHERE superior_login = '"+login+"'");
+
+    if(eventEditSchedule.exec())
+    {
+        while(eventEditSchedule.next())
+        {
+            superiorID = eventEditSchedule.value(0).toString();
+        }
+    }
+     QString date = QDate::currentDate().toString();
+     QString superior = ui->loginStatus->text();
+
+    QString description = "Przełożony " + superior + " edytował grafik pracownikowi o id " + id + " dnia " + date ;
+
+    EditRegisterEvent editEvent ;
+
+    editScheduleQuery.prepare("UPDATE employee_schedule SET  work_start_time = '"+startTime.toString()+"' "
                               ", work_end_time = '"+endTime.toString()+"' WHERE employee_id = '"+id+"' AND work_start_date = '"+startDate.toString(dateFormat)+"' ");
 
     if(editScheduleQuery.exec())
     {
         QMessageBox::information(this,"Sukces","Pomyślnie edytowałeś zapis w grafiku");
+        editEvent.saveEvent(superiorID,description);
 
     }
     else
@@ -504,9 +559,31 @@ void Regworktime::on_addManualRegister_clicked()
                                 ", break_end_time = '"+ui->breakEndTime->text()+"', is_present = '1' "
                                 "WHERE date = '"+ui->workstartDatemanualRegister->text()+"'");
 
+    QString employee_id = ui->manualRegisterId->text();
+    QString reason = ui->registerReason->toPlainText() ;
+    QString superiorID;
+    QString login = ui->loginStatus->text() ;
+    QSqlQuery eventEditSchedule;
+    eventEditSchedule.prepare("SELECT employee_id from employee WHERE superior_login = '"+login+"'");
+
+    if(eventEditSchedule.exec())
+    {
+        while(eventEditSchedule.next())
+        {
+            superiorID = eventEditSchedule.value(0).toString();
+        }
+    }
+     QString date = QDate::currentDate().toString();
+     QString superior = ui->loginStatus->text();
+
+    QString description = "Przełożony " + superior + " zarejestrował czas pracy ręcznie pracownikowi o id " + employee_id + " dnia " + date  + " Powód: " + reason;
+
+    EditRegisterEvent editEvent ;
+
     if(manualRegisterQuery.exec())
     {
         QMessageBox::information(this,"Sukces","Poprawnie zarejestrowałeś czas pracy");
+        editEvent.saveEvent(superiorID,description);
     }
     else
     {
