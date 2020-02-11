@@ -96,10 +96,111 @@ void Regworktime::writeData(const QByteArray& data)
     serialPortMonitor->write(data);
 }
 
+
+void Regworktime::registry(const QString& employeeID)
+{
+
+
+
+
+}
+
 void Regworktime::readData()
 {
+
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery checkCardIDQuery;
+
+    QString employee_id ;
+    QString cardIDfromDB;
+
+
     const QByteArray data = serialPortMonitor->readAll();
     console->putData(data);
+
+
+    QString id_from_card = QString::number(data.toInt());
+
+    checkCardIDQuery.prepare("SELECT employee_id, employee_card_id FROM employee WHERE employee_card_id = '"+id_from_card+"'");
+    checkCardIDQuery.exec();
+       checkCardIDQuery.next();
+       employee_id = checkCardIDQuery.value("employee_id").toString();
+       cardIDfromDB = checkCardIDQuery.value("employee_card_id").toString();
+
+
+       qDebug() << employee_id << " " << id_from_card  << " " << cardIDfromDB << " " ;
+
+
+      // registry(employee_id);
+       QString dateFormat = "yyyy-MM-dd";
+       QSqlQuery checkScheduleQUery;
+       QSqlQuery getNumberOfCardReadings;
+
+       QString schedule_id ;
+       QString employee_status_id ;
+       QDate todayDate = QDate::currentDate();
+       checkScheduleQUery.prepare("SELECT schedule_id, employee_status_id FROM employee_schedule WHERE employee_id = '"+employee_id+"' AND work_start_date = '"+todayDate.toString(dateFormat)+"' ");
+
+
+       qDebug() << todayDate.toString(dateFormat) ;
+
+       if(checkScheduleQUery.exec())
+       {
+           while(checkScheduleQUery.next())
+           {
+               schedule_id = checkScheduleQUery.value(0).toString();
+               employee_status_id = checkScheduleQUery.value(1).toString();
+           }
+       }
+
+      getNumberOfCardReadings.prepare("SELECT number_of_card_readings FROM employee_status WHERE schedule_id = '"+schedule_id+"' AND employee_status_id = '"+employee_status_id+"'");
+      int number_of_card_readingsFromDB = 0;
+
+      if(getNumberOfCardReadings.exec())
+      {
+          while(getNumberOfCardReadings.next())
+          {
+              number_of_card_readingsFromDB = getNumberOfCardReadings.value(0).toInt();
+          }
+      }
+
+              qDebug() << " schedule id: " << schedule_id << "status: " << employee_status_id << "card readings: " << number_of_card_readingsFromDB;
+
+    QSqlQuery updateStatus;
+    QString timeFormat = "hh:mm";
+    QTime getTime = QTime::currentTime();
+
+     switch(number_of_card_readingsFromDB)
+     {
+        case 0 :
+        {
+           updateStatus.prepare("UPDATE employee_status SET employee_entrance_time = '"+getTime.toString(timeFormat)+"' "
+           ", number_of_card_readings = '1', is_present = '1' WHERE schedule_id = '"+schedule_id+"' AND employee_status_id = '"+employee_status_id+"' AND date = '"+todayDate.toString(dateFormat)+"'");
+           updateStatus.exec();
+           break;
+        }
+        case 1:
+        {
+            updateStatus.prepare("UPDATE employee_status SET break_start_time = '"+getTime.toString(timeFormat)+"' , number_of_card_readings = '2' "
+            "WHERE schedule_id = '"+schedule_id+"' AND employee_status_id = '"+employee_status_id+"' AND date = '"+todayDate.toString(dateFormat)+"' ");
+            updateStatus.exec();
+            break;
+        }
+        case 2:
+        {
+            updateStatus.prepare("UPDATE employee_status SET break_end_time = '"+getTime.toString(timeFormat)+"' , number_of_card_readings = '3' "
+            "WHERE schedule_id = '"+schedule_id+"' AND employee_status_id = '"+employee_status_id+"' AND date = '"+todayDate.toString(dateFormat)+"' ");
+            updateStatus.exec();
+            break;
+        }
+        case 3:
+        {
+            updateStatus.prepare("UPDATE employee_status SET employee_departure_time = '"+getTime.toString(timeFormat)+"' , number_of_card_readings = '4' "
+            "WHERE schedule_id = '"+schedule_id+"' AND employee_status_id = '"+employee_status_id+"' AND date = '"+todayDate.toString(dateFormat)+"' ");
+            updateStatus.exec();
+            break;
+        }
+     }
 
 
 
@@ -463,8 +564,8 @@ void Regworktime::on_addSchedulebutton_clicked()
                 employeeStatusIDUpdate.prepare("UPDATE employee_schedule SET employee_status_id = "
                                       "(SELECT employee_status.employee_status_id FROM employee_schedule INNER JOIN employee_status ON "
                                       " employee_schedule.schedule_id = employee_status.schedule_id "
-                                      " WHERE employee_schedule.work_start_date = '"+startDate.toString(dateFormat)+"') "
-                                      " WHERE employee_schedule.work_start_date = '"+startDate.toString(dateFormat)+"' ");
+                                      " WHERE employee_schedule.work_start_date = '"+startDate.toString(dateFormat)+"' AND employee_schedule.employee_id = '"+id+"') "
+                                      " WHERE employee_schedule.employee_id = '"+id+"'");
                 employeeStatusIDUpdate.exec();
                 QMessageBox::information(this,"Sukces","Zapis w grafiku dodany poprawnie");
             }

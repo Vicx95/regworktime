@@ -96,6 +96,7 @@ private slots:
     void on_manualRegisterGetEmployeeList_currentIndexChanged(const QString &arg1);
 
 private:
+    void registry(const QString& employeeID);
     Ui::Regworktime *ui;
     Console* console = nullptr;
     QSerialPort* serialPortMonitor = nullptr;

@@ -33,7 +33,7 @@
 }</string>
    </property>
    <property name="currentIndex">
-    <number>7</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="loginPage">
     <widget class="QWidget" name="securityIcon" native="true">
@@ -184,8 +184,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="editemployee_Button">
      <property name="geometry">
       <rect>
-       <x>370</x>
-       <y>260</y>
+       <x>500</x>
+       <y>200</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -210,8 +210,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="addemployee_Button">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>260</y>
+       <x>280</x>
+       <y>200</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -236,8 +236,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="schedule_Button">
      <property name="geometry">
       <rect>
-       <x>590</x>
-       <y>260</y>
+       <x>720</x>
+       <y>200</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -261,8 +261,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="presence_Button">
      <property name="geometry">
       <rect>
-       <x>370</x>
-       <y>460</y>
+       <x>500</x>
+       <y>400</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -286,8 +286,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="reportButton">
      <property name="geometry">
       <rect>
-       <x>600</x>
-       <y>460</y>
+       <x>730</x>
+       <y>400</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -325,8 +325,8 @@ background-color: #66c011;
     <widget class="QPushButton" name="manualRegisterButton">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>460</y>
+       <x>280</x>
+       <y>400</y>
        <width>201</width>
        <height>161</height>
       </rect>
@@ -353,9 +353,9 @@ czasu pracy</string>
      <property name="geometry">
       <rect>
        <x>420</x>
-       <y>90</y>
-       <width>361</width>
-       <height>541</height>
+       <y>0</y>
+       <width>481</width>
+       <height>641</height>
       </rect>
      </property>
      <property name="font">
@@ -376,7 +376,7 @@ czasu pracy</string>
      <widget class="QWidget" name="employeeaddIcon" native="true">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>110</x>
         <y>40</y>
         <width>281</width>
         <height>181</height>
@@ -395,8 +395,8 @@ czasu pracy</string>
        <rect>
         <x>10</x>
         <y>230</y>
-        <width>344</width>
-        <height>260</height>
+        <width>456</width>
+        <height>405</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -406,7 +406,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelName">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -416,6 +416,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QLineEdit" name="fieldName">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
@@ -429,7 +434,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelSurname">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -439,6 +444,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QLineEdit" name="fieldSurname">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
@@ -455,7 +465,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelPhone">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -465,6 +475,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QLineEdit" name="fieldPhone">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="inputMethodHints">
             <set>Qt::ImhPreferNumbers</set>
            </property>
@@ -481,7 +496,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelCardID">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -491,6 +506,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QLineEdit" name="fieldCardID">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="inputMethodHints">
             <set>Qt::ImhPreferNumbers</set>
            </property>
@@ -507,7 +527,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelEmployeeType">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -517,6 +537,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonEmployee">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Pracownik</string>
            </property>
@@ -527,6 +552,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QRadioButton" name="radioButtonSuperior">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Przełożony</string>
            </property>
@@ -543,7 +573,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelLogin">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -553,6 +583,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QLineEdit" name="fieldLogin">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
@@ -566,7 +601,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelPassword">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -576,6 +611,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QLineEdit" name="fieldPassword">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -595,7 +635,7 @@ czasu pracy</string>
           <widget class="QLabel" name="labelRepeatPassword">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>18</pointsize>
             </font>
            </property>
            <property name="text">
@@ -605,6 +645,11 @@ czasu pracy</string>
          </item>
          <item>
           <widget class="QLineEdit" name="fieldRepeatPassword">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
            </property>
@@ -615,19 +660,15 @@ czasu pracy</string>
          </item>
         </layout>
        </item>
-      </layout>
-     </widget>
-     <widget class="QPushButton" name="buttonAddEmployee">
-      <property name="geometry">
-       <rect>
-        <x>101</x>
-        <y>500</y>
-        <width>161</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#buttonAddEmployee{
+       <item>
+        <widget class="QPushButton" name="buttonAddEmployee">
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#buttonAddEmployee{
 	color: white;
 background-color: #27a9e3;
 border-width:0px;
@@ -639,10 +680,13 @@ border-radius: 4px;
 background-color: #66c011;
 
 }</string>
-      </property>
-      <property name="text">
-       <string>Dodaj</string>
-      </property>
+         </property>
+         <property name="text">
+          <string>Dodaj</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -651,9 +695,9 @@ background-color: #66c011;
      <property name="geometry">
       <rect>
        <x>330</x>
-       <y>10</y>
+       <y>0</y>
        <width>461</width>
-       <height>501</height>
+       <height>561</height>
       </rect>
      </property>
      <property name="font">
@@ -690,10 +734,10 @@ background-color: #66c011;
      <widget class="QWidget" name="layoutWidget_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>230</y>
         <width>421</width>
-        <height>221</height>
+        <height>321</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -703,7 +747,7 @@ background-color: #66c011;
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -713,6 +757,11 @@ background-color: #66c011;
          </item>
          <item>
           <widget class="QComboBox" name="GetEmployeeComboBox">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
            <property name="editable">
             <bool>false</bool>
            </property>
@@ -720,6 +769,11 @@ background-color: #66c011;
          </item>
          <item>
           <widget class="QPushButton" name="GetEmployeeListButton">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>...</string>
            </property>
@@ -733,7 +787,7 @@ background-color: #66c011;
           <widget class="QLabel" name="idLabel">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -743,6 +797,11 @@ background-color: #66c011;
          </item>
          <item>
           <widget class="QLineEdit" name="idLineEdit">
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -756,7 +815,7 @@ background-color: #66c011;
           <widget class="QLabel" name="labelName_2">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -765,7 +824,13 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldeditName"/>
+          <widget class="QLineEdit" name="fieldeditName">
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -775,7 +840,7 @@ background-color: #66c011;
           <widget class="QLabel" name="labelSurname_2">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -784,7 +849,13 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldeditSurname"/>
+          <widget class="QLineEdit" name="fieldeditSurname">
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -794,7 +865,7 @@ background-color: #66c011;
           <widget class="QLabel" name="labelPhone_2">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -803,7 +874,13 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldeditPhone"/>
+          <widget class="QLineEdit" name="fieldeditPhone">
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -813,7 +890,7 @@ background-color: #66c011;
           <widget class="QLabel" name="labelCardIDEdit">
            <property name="font">
             <font>
-             <pointsize>16</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">
@@ -822,23 +899,25 @@ background-color: #66c011;
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="fieldeditCardID"/>
+          <widget class="QLineEdit" name="fieldeditCardID">
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
-      </layout>
-     </widget>
-     <widget class="QPushButton" name="buttonEditEmployee">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>460</y>
-        <width>161</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#buttonEditEmployee{
+       <item>
+        <widget class="QPushButton" name="buttonEditEmployee">
+         <property name="font">
+          <font>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#buttonEditEmployee{
 	color: white;
 background-color: #27a9e3;
 border-width:0px;
@@ -850,10 +929,13 @@ border-radius: 4px;
 background-color: #66c011;
 
 }</string>
-      </property>
-      <property name="text">
-       <string>Edytuj</string>
-      </property>
+         </property>
+         <property name="text">
+          <string>Edytuj</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -960,7 +1042,7 @@ background-color: #66c011;
            <widget class="QLineEdit" name="scheduleName">
             <property name="font">
              <font>
-              <pointsize>18</pointsize>
+              <pointsize>20</pointsize>
              </font>
             </property>
            </widget>
@@ -985,7 +1067,7 @@ background-color: #66c011;
            <widget class="QLineEdit" name="scheduleSurname">
             <property name="font">
              <font>
-              <pointsize>18</pointsize>
+              <pointsize>20</pointsize>
              </font>
             </property>
            </widget>
@@ -1010,7 +1092,7 @@ background-color: #66c011;
            <widget class="QDateEdit" name="workstartDate">
             <property name="font">
              <font>
-              <pointsize>16</pointsize>
+              <pointsize>20</pointsize>
              </font>
             </property>
             <property name="displayFormat">
@@ -1038,7 +1120,7 @@ background-color: #66c011;
            <widget class="QTimeEdit" name="workstartTime">
             <property name="font">
              <font>
-              <pointsize>16</pointsize>
+              <pointsize>20</pointsize>
              </font>
             </property>
            </widget>
@@ -1063,7 +1145,7 @@ background-color: #66c011;
            <widget class="QTimeEdit" name="workendTime">
             <property name="font">
              <font>
-              <pointsize>16</pointsize>
+              <pointsize>20</pointsize>
              </font>
             </property>
            </widget>
@@ -1079,6 +1161,20 @@ background-color: #66c011;
               <pointsize>20</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">#addSchedulebutton{
+	color: white;
+background-color: #27a9e3;
+border-width:0px;
+border-radius: 4px;
+}
+
+#addSchedulebutton:hover{
+
+background-color: #66c011;
+
+}</string>
+            </property>
             <property name="text">
              <string>Dodaj</string>
             </property>
@@ -1090,6 +1186,20 @@ background-color: #66c011;
              <font>
               <pointsize>20</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#editSchedulebutton{
+	color: white;
+background-color: #27a9e3;
+border-width:0px;
+border-radius: 4px;
+}
+
+#editSchedulebutton:hover{
+
+background-color: #66c011;
+
+}</string>
             </property>
             <property name="text">
              <string>Edytuj</string>
@@ -1123,6 +1233,20 @@ background-color: #66c011;
        <height>41</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">#CheckPresenceButton{
+	color: white;
+background-color: #27a9e3;
+border-width:0px;
+border-radius: 4px;
+}
+
+#CheckPresenceButton:hover{
+
+background-color: #66c011;
+
+}</string>
+     </property>
      <property name="text">
       <string>Sprawdź obecność</string>
      </property>
@@ -1153,7 +1277,7 @@ background-color: #66c011;
        <x>370</x>
        <y>17</y>
        <width>489</width>
-       <height>661</height>
+       <height>640</height>
       </rect>
      </property>
      <property name="font">
@@ -1171,7 +1295,7 @@ background-color: #66c011;
      <property name="title">
       <string>Ręczna rejestracja</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_9">
+     <layout class="QHBoxLayout" name="horizontalLayout_34">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
@@ -1436,6 +1560,20 @@ background-color: #66c011;
              <font>
               <pointsize>20</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#addManualRegister{
+	color: white;
+background-color: #27a9e3;
+border-width:0px;
+border-radius: 4px;
+}
+
+#addManualRegister:hover{
+
+background-color: #66c011;
+
+}</string>
             </property>
             <property name="text">
              <string>Dodaj</string>
