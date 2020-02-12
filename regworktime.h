@@ -13,6 +13,12 @@
 #include <QSerialPort>
 #include <QRegularExpression>
 #include <QCryptographicHash>
+#include <QPrinter>
+#include <QPdfWriter>
+#include <QPainter>
+#include <QPrintDialog>
+#include <QTextTable>
+#include <QTableWidget>
 #include "editregisterevent.h"
 
 #include "console.h"
@@ -94,6 +100,12 @@ private slots:
     void on_GetEmployeeListManualRegister_clicked();
 
     void on_manualRegisterGetEmployeeList_currentIndexChanged(const QString &arg1);
+
+    void on_getEmployeeListGenerateSchedule_clicked();
+
+    void on_generateScheduleEmployeeList_currentIndexChanged(const QString &arg1);
+
+    void on_generateButton_clicked();
 
 private:
     void registry(const QString& employeeID);

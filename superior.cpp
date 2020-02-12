@@ -44,14 +44,11 @@ bool Superior::login()
 
 
 
-        QMessageBox msgBox;
+
 
         if(!query.exec())
         {
-            msgBox.setText("Błąd");
-            msgBox.setInformativeText("Nie można wykonać zapytania");
-            msgBox.setStandardButtons(QMessageBox::Ok);
-            msgBox.exec();
+
             success = false;
         }
         else
@@ -69,6 +66,7 @@ bool Superior::login()
                 }
                 else
                 {
+
                     success = false ;
                 }
             }
